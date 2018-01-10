@@ -1,8 +1,5 @@
 package com.ufcg.si1.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import exceptions.ObjetoInvalidoException;
 
 public class Produto {
@@ -15,7 +12,7 @@ public class Produto {
 
 	private String fabricante;
 
-	private List categorias = new ArrayList();
+	private String categoria;
 
 	public int situacao; // usa variaveis estaticas abaixo
 	/* situacoes do produto */
@@ -26,12 +23,12 @@ public class Produto {
 		id = 0;
 	}
 
-	public Produto(long id, String nome, String codigoBarra, String fabricante, List categorias) {
+	public Produto(long id, String nome, String codigoBarra, String fabricante, String nomeCategoria) {
 		this.id = id;
 		this.nome = nome;
 		this.codigoBarra = codigoBarra;
 		this.fabricante = fabricante;
-		this.categorias = categorias;
+		this.categoria = nomeCategoria;
 		this.situacao = Produto.EM_FALTA;
 	}
 
@@ -67,27 +64,54 @@ public class Produto {
 		this.codigoBarra = codigoBarra;
 	}
 
-	public List<Categoria> getCategorias() {
-		return this.categorias;
+	public String getCategoria() {
+		return this.categoria;
 	}
 
-	public void adicionarCategorias(Categoria cat) {
-		this.categorias.add(cat);
-	}
-
-	public void mudaCategorias(List categorias) {
-		this.categorias = categorias;
+	public void mudaCategoria(String categoria) {
+		this.categoria = categoria;
 	}
 
 	public void mudaSituacao(int situacao) throws ObjetoInvalidoException {
 		if (situacao == Produto.DISPONIVEL || situacao == Produto.EM_FALTA) {
 			this.situacao = situacao;
 		} else {
-			throw new ObjetoInvalidoException("Situação Inválida");
+			throw new ObjetoInvalidoException("Situacao Invalida");
 		}
 	}
 
 	public int getSituacao() throws ObjetoInvalidoException {
 		return this.situacao;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((fabricante == null) ? 0 : fabricante.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Produto other = (Produto) obj;
+		if (fabricante == null) {
+			if (other.fabricante != null)
+				return false;
+		} else if (!fabricante.equals(other.fabricante))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		return true;
 	}
 }

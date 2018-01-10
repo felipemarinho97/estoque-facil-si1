@@ -17,6 +17,8 @@ import com.ufcg.si1.service.ProdutoService;
 import com.ufcg.si1.service.ProdutoServiceImpl;
 import com.ufcg.si1.util.CustomErrorType;
 
+import exceptions.ObjetoInvalidoException;
+
 @RestController
 @RequestMapping("/api")
 @CrossOrigin
@@ -24,7 +26,8 @@ public class RestApiController {
 
 	ProdutoService produtoService = new ProdutoServiceImpl();
 
-	// -------------------Retrieve All Products---------------------------------------------
+	// -------------------Retrieve All
+	// Products---------------------------------------------
 
 	@RequestMapping(value = "/produto/", method = RequestMethod.GET)
 	public ResponseEntity<List<Produto>> listAllUsers() {
@@ -37,14 +40,22 @@ public class RestApiController {
 		return new ResponseEntity<List<Produto>>(produtos, HttpStatus.OK);
 	}
 
-	// -------------------Criar um Produto-------------------------------------------
+	// -------------------Criar um
+	// Produto-------------------------------------------
 
 	@RequestMapping(value = "/produto/", method = RequestMethod.POST)
 	public ResponseEntity<?> criarProduto(@RequestBody Produto produto, UriComponentsBuilder ucBuilder) {
 
 		if (produtoService.doesProdutoExist(produto)) {
 			return new ResponseEntity(new CustomErrorType("O produto " + produto.getNome() + " do fabricante "
-					+ produto.getFabricante() + " já está cadastrado!"), HttpStatus.CONFLICT);
+					+ produto.getFabricante() + " ja esta cadastrado!"), HttpStatus.CONFLICT);
+		}
+
+		try {
+			produto.mudaSituacao(Produto.EM_FALTA);
+		} catch (ObjetoInvalidoException e) {
+			return new ResponseEntity(new CustomErrorType("Error: Produto" + produto.getNome() + " do fabricante "
+					+ produto.getFabricante() + " alguma coisa errada aconteceu!"), HttpStatus.NOT_ACCEPTABLE);
 		}
 
 		produtoService.saveProduto(produto);
@@ -79,10 +90,10 @@ public class RestApiController {
 		currentProduto.mudaNome(produto.getNome());
 		currentProduto.setCodigoBarra(produto.getCodigoBarra());
 		currentProduto.mudaFabricante(produto.getFabricante());
-		currentProduto.mudaCategorias(produto.getCategorias());
+		currentProduto.mudaCategoria(produto.getCategoria());
 
-		// resolvi criar um serviço na API só para mudar a situação do produto
-		// esse código não precisa mais
+		// resolvi criar um serviï¿½o na API sï¿½ para mudar a situaï¿½ï¿½o do produto
+		// esse cï¿½digo nï¿½o precisa mais
 		// try {
 		// currentProduto.mudaSituacao(produto.pegaSituacao());
 		// } catch (ObjetoInvalidoException e) {
@@ -107,14 +118,14 @@ public class RestApiController {
 		return new ResponseEntity<Produto>(HttpStatus.NO_CONTENT);
 	}
 
-	@RequestMapping(value = "/produto/indisponivel", method = RequestMethod.POST)
+	@RequestMapping(value = "/produto/indisponivel/", method = RequestMethod.POST)
 	public ResponseEntity<?> indisponibilizarProduto(@RequestBody Produto produtoIndisponivel) {
 		produtoIndisponivel.situacao = Produto.EM_FALTA;
 		produtoService.updateProduto(produtoIndisponivel);
 		return new ResponseEntity<Produto>(produtoIndisponivel, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/produto/disponivel", method = RequestMethod.POST)
+	@RequestMapping(value = "/produto/disponivel/", method = RequestMethod.POST)
 	public ResponseEntity<?> disponibilizarProduto(@RequestBody Produto produtoDisponivel) {
 		produtoDisponivel.situacao = Produto.DISPONIVEL;
 		produtoService.updateProduto(produtoDisponivel);
