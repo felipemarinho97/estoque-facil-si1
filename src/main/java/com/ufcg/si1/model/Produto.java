@@ -1,5 +1,7 @@
 package com.ufcg.si1.model;
 
+import java.math.BigDecimal;
+
 import exceptions.ObjetoInvalidoException;
 
 public class Produto {
@@ -7,6 +9,8 @@ public class Produto {
 	private long id;
 
 	private String nome;
+
+	private BigDecimal preco;
 
 	private String codigoBarra;
 
@@ -20,12 +24,15 @@ public class Produto {
 	public static final int EM_FALTA = 2;
 
 	public Produto() {
-		id = 0;
+		this.id = 0;
+		this.preco = new BigDecimal(0);
 	}
 
-	public Produto(long id, String nome, String codigoBarra, String fabricante, String nomeCategoria) {
+	public Produto(long id, String nome, String codigoBarra, String fabricante,
+			String nomeCategoria) {
 		this.id = id;
 		this.nome = nome;
+		this.preco = new BigDecimal(0);
 		this.codigoBarra = codigoBarra;
 		this.fabricante = fabricante;
 		this.categoria = nomeCategoria;
@@ -38,6 +45,14 @@ public class Produto {
 
 	public void mudaNome(String nome) {
 		this.nome = nome;
+	}
+
+	public BigDecimal getPreco() {
+		return preco;
+	}
+
+	public void setPreco(BigDecimal preco) {
+		this.preco = preco;
 	}
 
 	public long getId() {

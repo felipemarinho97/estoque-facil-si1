@@ -10,21 +10,17 @@ public interface ProdutoService {
 
 	List<Produto> findAllProdutos();
 
-
     void saveProduto(Produto produto);
-
 
 	Produto findById(long id);
 
 	void updateProduto(Produto user);
-
 
 	void deleteProdutoById(long id);
 
     int size();
 
 	Iterator<Produto> getIterator();
-
 
 	boolean doesProdutoExist(Produto produto);
 	

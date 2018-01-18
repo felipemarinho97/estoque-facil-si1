@@ -88,6 +88,7 @@ public class RestApiController {
 		}
 
 		currentProduto.mudaNome(produto.getNome());
+		currentProduto.setPreco(produto.getPreco());
 		currentProduto.setCodigoBarra(produto.getCodigoBarra());
 		currentProduto.mudaFabricante(produto.getFabricante());
 		currentProduto.mudaCategoria(produto.getCategoria());
