@@ -29,13 +29,13 @@ app.controller("SearchProductCtrl", function ($scope, $uibModal, $http, toastr,$
         });
 
         modalInstance.result.then(function (result) {
-            if (result === 201) {
+            if (result.status === 201) {
               loadProductsList();
             }
         });
     };
 
-    $scope.openAtribuirPrecoParaProdutoDialog = function() {
+    $scope.openAtribuirPrecoParaProdutoDialog = function(product) {
 
         // var modalInstance = $uibModal.open({
         //     ariaLabelledBy: 'Adicionar Produto',
@@ -48,12 +48,17 @@ app.controller("SearchProductCtrl", function ($scope, $uibModal, $http, toastr,$
             ariaLabelledBy: 'Atribuir preço á Produto',
             ariaDescribedBy: 'Formulario para Atribuir preço á Produto',
             templateUrl: 'core/main/updateProductPriceView.html',
-            controller: 'UpdateProductPriceCtrl'
+            controller: 'UpdateProductPriceCtrl',
+            resolve: {
+                produto: function () {
+                    return angular.copy(product);
+                }
+            }
         });
 
         modalInstance.result.then(function (result) {
-            if (result === 201) {
-                console.log("carregamento");
+            console.log(result)
+            if (result.status === 200) {
                 loadProductsList();
             }
         });
@@ -138,13 +143,30 @@ app.controller("CreateProductCtrl", function ($uibModalInstance, $http, toastr) 
     };
 });
 
-app.controller("UpdateProductPriceCtrl", function ($scope, $uibModalInstance, $http, toastr) {
+app.controller("UpdateProductPriceCtrl", function ($scope, $uibModalInstance, mainService, toastr, produto) {
 
-    $scope.produto = {};
+    $scope.produto = produto;
 
-    $scope.submit = function (product, situacao) {
+    $scope.submit = function (product) {
 
         //adicionar
+
+        console.log(product)
+
+        mainService.updateProductById(product.id, product)
+            .then(function success(response) {
+
+                if (response.status === 200) {
+                    toastr.success("Produto editado com sucesso!");
+                    $uibModalInstance.close({
+                        status: 200,
+                        newProduct: response.data
+                    });
+                }
+            }, function error(error) {
+                console.log(error);
+                toastr.error("Problemas ao tentar atribuir preço ao produto: " + product.id);
+            });
 
     };
 
