@@ -4,6 +4,7 @@ package com.ufcg.si1.service;
 import java.util.Iterator;
 import java.util.List;
 
+import com.ufcg.si1.model.Lote;
 import com.ufcg.si1.model.Produto;
 
 public interface ProdutoService {
@@ -23,5 +24,6 @@ public interface ProdutoService {
 	Iterator<Produto> getIterator();
 
 	boolean doesProdutoExist(Produto produto);
-	
+
+	void saveLote(Lote lote);
 }

@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+import com.ufcg.si1.model.Lote;
 import org.springframework.stereotype.Service;
 
 import com.ufcg.si1.model.Produto;
@@ -16,8 +17,11 @@ public class ProdutoServiceImpl implements ProdutoService {
 
 	private static List<Produto> produtos;
 
+	private static List<Lote> lotes;
+
 	static {
 		produtos = populateDummyProdutos();
+		lotes = new ArrayList<>();
 	}
 
 	private static List<Produto> populateDummyProdutos() {
@@ -85,5 +89,10 @@ public class ProdutoServiceImpl implements ProdutoService {
 			}
 		}
 		return false;
+	}
+
+	public void saveLote(Lote lote) {
+		lote.setId(counter.incrementAndGet());
+		lotes.add(lote);
 	}
 }

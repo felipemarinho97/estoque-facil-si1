@@ -1,7 +1,12 @@
 package com.ufcg.si1.controller;
 
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
+import com.ufcg.si1.model.DTO.LoteDTO;
+import com.ufcg.si1.model.Lote;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,112 +29,127 @@ import exceptions.ObjetoInvalidoException;
 @CrossOrigin
 public class RestApiController {
 
-	ProdutoService produtoService = new ProdutoServiceImpl();
+    ProdutoService produtoService = new ProdutoServiceImpl();
 
-	// -------------------Retrieve All
-	// Products---------------------------------------------
+    // -------------------Retrieve All
+    // Products---------------------------------------------
 
-	@RequestMapping(value = "/produto/", method = RequestMethod.GET)
-	public ResponseEntity<List<Produto>> listAllUsers() {
-		List<Produto> produtos = produtoService.findAllProdutos();
+    @RequestMapping(value = "/produto/", method = RequestMethod.GET)
+    public ResponseEntity<List<Produto>> listAllUsers() {
+        List<Produto> produtos = produtoService.findAllProdutos();
 
-		if (produtos.isEmpty()) {
-			return new ResponseEntity(HttpStatus.NO_CONTENT);
-			// You many decide to return HttpStatus.NOT_FOUND
-		}
-		return new ResponseEntity<List<Produto>>(produtos, HttpStatus.OK);
-	}
+        if (produtos.isEmpty()) {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+            // You many decide to return HttpStatus.NOT_FOUND
+        }
+        return new ResponseEntity<List<Produto>>(produtos, HttpStatus.OK);
+    }
 
-	// -------------------Criar um
-	// Produto-------------------------------------------
+    // -------------------Criar um
+    // Produto-------------------------------------------
 
-	@RequestMapping(value = "/produto/", method = RequestMethod.POST)
-	public ResponseEntity<?> criarProduto(@RequestBody Produto produto, UriComponentsBuilder ucBuilder) {
+    @RequestMapping(value = "/produto/", method = RequestMethod.POST)
+    public ResponseEntity<?> criarProduto(@RequestBody Produto produto, UriComponentsBuilder ucBuilder) {
 
-		if (produtoService.doesProdutoExist(produto)) {
-			return new ResponseEntity(new CustomErrorType("O produto " + produto.getNome() + " do fabricante "
-					+ produto.getFabricante() + " ja esta cadastrado!"), HttpStatus.CONFLICT);
-		}
+        if (produtoService.doesProdutoExist(produto)) {
+            return new ResponseEntity(new CustomErrorType("O produto " + produto.getNome() + " do fabricante "
+                    + produto.getFabricante() + " ja esta cadastrado!"), HttpStatus.CONFLICT);
+        }
 
-		try {
-			produto.mudaSituacao(Produto.EM_FALTA);
-		} catch (ObjetoInvalidoException e) {
-			return new ResponseEntity(new CustomErrorType("Error: Produto" + produto.getNome() + " do fabricante "
-					+ produto.getFabricante() + " alguma coisa errada aconteceu!"), HttpStatus.NOT_ACCEPTABLE);
-		}
+        try {
+            produto.mudaSituacao(Produto.EM_FALTA);
+        } catch (ObjetoInvalidoException e) {
+            return new ResponseEntity(new CustomErrorType("Error: Produto" + produto.getNome() + " do fabricante "
+                    + produto.getFabricante() + " alguma coisa errada aconteceu!"), HttpStatus.NOT_ACCEPTABLE);
+        }
 
-		produtoService.saveProduto(produto);
+        produtoService.saveProduto(produto);
 
-		// HttpHeaders headers = new HttpHeaders();
-		// headers.setLocation(ucBuilder.path("/api/produto/{id}").buildAndExpand(produto.getId()).toUri());
+        // HttpHeaders headers = new HttpHeaders();
+        // headers.setLocation(ucBuilder.path("/api/produto/{id}").buildAndExpand(produto.getId()).toUri());
 
-		return new ResponseEntity<Produto>(produto, HttpStatus.CREATED);
-	}
+        return new ResponseEntity<Produto>(produto, HttpStatus.CREATED);
+    }
 
-	@RequestMapping(value = "/produto/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> consultarProduto(@PathVariable("id") long id) {
+    @RequestMapping(value = "/produto/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> consultarProduto(@PathVariable("id") long id) {
 
-		Produto p = produtoService.findById(id);
-		if (p == null) {
-			return new ResponseEntity(new CustomErrorType("Produto with id " + id + " not found"),
-					HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<Produto>(p, HttpStatus.OK);
-	}
+        Produto p = produtoService.findById(id);
+        if (p == null) {
+            return new ResponseEntity(new CustomErrorType("Produto with id " + id + " not found"),
+                    HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Produto>(p, HttpStatus.OK);
+    }
 
-	@RequestMapping(value = "/produto/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<?> updateProduto(@PathVariable("id") long id, @RequestBody Produto produto) {
+    @RequestMapping(value = "/produto/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<?> updateProduto(@PathVariable("id") long id, @RequestBody Produto produto) {
 
-		Produto currentProduto = produtoService.findById(id);
+        Produto currentProduto = produtoService.findById(id);
 
-		if (currentProduto == null) {
-			return new ResponseEntity(new CustomErrorType("Unable to upate. Produto with id " + id + " not found."),
-					HttpStatus.NOT_FOUND);
-		}
+        if (currentProduto == null) {
+            return new ResponseEntity(new CustomErrorType("Unable to upate. Produto with id " + id + " not found."),
+                    HttpStatus.NOT_FOUND);
+        }
 
-		currentProduto.mudaNome(produto.getNome());
-		currentProduto.setPreco(produto.getPreco());
-		currentProduto.setCodigoBarra(produto.getCodigoBarra());
-		currentProduto.mudaFabricante(produto.getFabricante());
-		currentProduto.mudaCategoria(produto.getCategoria());
+        currentProduto.mudaNome(produto.getNome());
+        currentProduto.setPreco(produto.getPreco());
+        currentProduto.setCodigoBarra(produto.getCodigoBarra());
+        currentProduto.mudaFabricante(produto.getFabricante());
+        currentProduto.mudaCategoria(produto.getCategoria());
 
-		// resolvi criar um servi�o na API s� para mudar a situa��o do produto
-		// esse c�digo n�o precisa mais
-		// try {
-		// currentProduto.mudaSituacao(produto.pegaSituacao());
-		// } catch (ObjetoInvalidoException e) {
-		// return new ResponseEntity(new CustomErrorType("Unable to upate. Produto with
-		// id " + id + " invalid."),
-		// HttpStatus.NOT_FOUND);
-		// }
+        // resolvi criar um servi�o na API s� para mudar a situa��o do produto
+        // esse c�digo n�o precisa mais
+        // try {
+        // currentProduto.mudaSituacao(produto.pegaSituacao());
+        // } catch (ObjetoInvalidoException e) {
+        // return new ResponseEntity(new CustomErrorType("Unable to upate. Produto with
+        // id " + id + " invalid."),
+        // HttpStatus.NOT_FOUND);
+        // }
 
-		produtoService.updateProduto(currentProduto);
-		return new ResponseEntity<Produto>(currentProduto, HttpStatus.OK);
-	}
+        produtoService.updateProduto(currentProduto);
+        return new ResponseEntity<Produto>(currentProduto, HttpStatus.OK);
+    }
 
-	@RequestMapping(value = "/produto/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<?> deleteUser(@PathVariable("id") long id) {
+    @RequestMapping(value = "/produto/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteUser(@PathVariable("id") long id) {
 
-		Produto user = produtoService.findById(id);
-		if (user == null) {
-			return new ResponseEntity(new CustomErrorType("Unable to delete. Produto with id " + id + " not found."),
-					HttpStatus.NOT_FOUND);
-		}
-		produtoService.deleteProdutoById(id);
-		return new ResponseEntity<Produto>(HttpStatus.NO_CONTENT);
-	}
+        Produto user = produtoService.findById(id);
+        if (user == null) {
+            return new ResponseEntity(new CustomErrorType("Unable to delete. Produto with id " + id + " not found."),
+                    HttpStatus.NOT_FOUND);
+        }
+        produtoService.deleteProdutoById(id);
+        return new ResponseEntity<Produto>(HttpStatus.NO_CONTENT);
+    }
 
-	@RequestMapping(value = "/produto/indisponivel/", method = RequestMethod.POST)
-	public ResponseEntity<?> indisponibilizarProduto(@RequestBody Produto produtoIndisponivel) {
-		produtoIndisponivel.situacao = Produto.EM_FALTA;
-		produtoService.updateProduto(produtoIndisponivel);
-		return new ResponseEntity<Produto>(produtoIndisponivel, HttpStatus.OK);
-	}
+    @RequestMapping(value = "/produto/indisponivel/", method = RequestMethod.POST)
+    public ResponseEntity<?> indisponibilizarProduto(@RequestBody Produto produtoIndisponivel) {
+        produtoIndisponivel.situacao = Produto.EM_FALTA;
+        produtoService.updateProduto(produtoIndisponivel);
+        return new ResponseEntity<Produto>(produtoIndisponivel, HttpStatus.OK);
+    }
 
-	@RequestMapping(value = "/produto/disponivel/", method = RequestMethod.POST)
-	public ResponseEntity<?> disponibilizarProduto(@RequestBody Produto produtoDisponivel) {
-		produtoDisponivel.situacao = Produto.DISPONIVEL;
-		produtoService.updateProduto(produtoDisponivel);
-		return new ResponseEntity<Produto>(produtoDisponivel, HttpStatus.OK);
-	}
+    @RequestMapping(value = "/produto/disponivel/", method = RequestMethod.POST)
+    public ResponseEntity<?> disponibilizarProduto(@RequestBody Produto produtoDisponivel) {
+        produtoDisponivel.situacao = Produto.DISPONIVEL;
+        produtoService.updateProduto(produtoDisponivel);
+        return new ResponseEntity<Produto>(produtoDisponivel, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/produto/{id}/lote", method = RequestMethod.POST)
+    public ResponseEntity<?> criarLote(@PathVariable("id") long produtoId, @RequestBody LoteDTO loteDTO) {
+        Produto product = produtoService.findById(produtoId);
+
+        if (product == null) {
+            return new ResponseEntity(new CustomErrorType("Unable to create lote. Produto with id " + produtoId + " not found."),
+                    HttpStatus.NOT_FOUND);
+        }
+
+        produtoService.saveLote(new Lote(product, loteDTO.getNumeroDeItens(), loteDTO.getDataDeValidade()));
+
+        return new ResponseEntity<>("Lote cadastrado com sucesso", HttpStatus.CREATED);
+
+    }
 }
