@@ -147,9 +147,10 @@ public class RestApiController {
                     HttpStatus.NOT_FOUND);
         }
 
-        produtoService.saveLote(new Lote(product, loteDTO.getNumeroDeItens(), loteDTO.getDataDeValidade()));
+        Lote lote = produtoService.saveLote(new Lote(product, loteDTO.getNumeroDeItens(),
+                loteDTO.getDataDeValidade()));
 
-        return new ResponseEntity<>("Lote cadastrado com sucesso", HttpStatus.CREATED);
+        return new ResponseEntity<>(lote, HttpStatus.CREATED);
 
     }
 }

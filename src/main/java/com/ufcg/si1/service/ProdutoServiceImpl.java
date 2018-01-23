@@ -91,8 +91,10 @@ public class ProdutoServiceImpl implements ProdutoService {
 		return false;
 	}
 
-	public void saveLote(Lote lote) {
+	public Lote saveLote(Lote lote) {
 		lote.setId(counter.incrementAndGet());
 		lotes.add(lote);
+
+		return lote;
 	}
 }

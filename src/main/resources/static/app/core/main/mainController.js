@@ -85,13 +85,28 @@ app.controller("SearchProductCtrl", function ($scope, $uibModal, $http, toastr,$
             });
     };
 
-    $scope.createLot = function(produto) {
-        console.log(produto)
+    $scope.openCriarLoteDialog = function(product) {
+
+        $uibModal.open({
+            ariaLabelledBy: 'Criar lote',
+            ariaDescribedBy: 'Formulario para criar lote',
+            templateUrl: 'core/main/createLoteView.html',
+            controller: 'CriarLoteCtrl',
+            resolve: {
+                produto: function () {
+                    return angular.copy(product);
+                }
+            }
+        });
     };
 
-    $scope.atribuirPrice = function(product) {
-        console.log(product)
-    };
+    // $scope.createLot = function(produto) {
+    //     console.log(produto)
+    // };
+    //
+    // $scope.atribuirPrice = function(product) {
+    //     console.log(product)
+    // };
 
     loadProductsList();
     loadProductsList();
@@ -173,4 +188,51 @@ app.controller("UpdateProductPriceCtrl", function ($scope, $uibModalInstance, ma
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
+});
+
+app.controller("CriarLoteCtrl", function ($scope, $uibModalInstance, $http, toastr, produto) {
+
+    $scope.produto = produto;
+    $scope.dateformat = 'dd/MM/yyyy';
+    $scope.datePicker = {
+        opened : false
+    };
+
+    $scope.dataDeValidade = new Date();
+    $scope.numeroDeItens = 0;
+
+    $scope.dateOptions = {
+        formatYear: 'yy',
+        minDate: new Date(),
+        startingDay: 1
+    };
+
+    $scope.submit = function (dataDeValidade, numeroDeItens) {
+
+        //adicionar
+        var lote = {
+            dataDeValidade: dataDeValidade.getDay() + "/" + (dataDeValidade.getMonth() + 1) + dataDeValidade.getFullYear(),
+            numeroDeItens: numeroDeItens
+        }
+
+        $http.post("http://localhost:8080/api/produto/" + produto.id + "/lote", JSON.stringify(lote))
+            .then(function success(response) {
+                console.log(response)
+                if (response.status === 201) {
+                    console.log("Lote criado com sucesso!");
+                    $uibModalInstance.close();
+                }
+            }, function error(error) {
+                console.log(error);
+                toastr.error("Problemas ao tentar adicionar produto.");
+            });
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+
+    $scope.openDatePicker = function () {
+        $scope.datePicker.opened = true;
+    }
 });

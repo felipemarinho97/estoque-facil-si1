@@ -25,5 +25,5 @@ public interface ProdutoService {
 
 	boolean doesProdutoExist(Produto produto);
 
-	void saveLote(Lote lote);
+	Lote saveLote(Lote lote);
 }
