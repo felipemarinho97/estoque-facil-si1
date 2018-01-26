@@ -4,16 +4,15 @@
   "license": "MIT",
   "keywords": [
     "AngularJS",
-    "angular",
-    "node",
-    "express"
+    "angular"
   ],
   "authors": [
-    "Pablo Victor"
+    "Pablo Victor",
+    "Rhuan Reis"
   ],
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/ruanvictorreis/estoque-facil-backend/"
   },
   "ignore": [],
   "dependencies": {

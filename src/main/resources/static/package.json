@@ -4,12 +4,13 @@
     "description": "Projeto em AngularJS para a disciplina de SI1 - 2017.2",
     "keywords": [
         "AngularJS",
-        "angular",
-        "node",
-        "express"
+        "angular"
     ],
     "license": "MIT",
-    "author": "Pablo Victor",
+    "authors": [
+        "Pablo Victor",
+        "Rhuan Reis"
+    ],
     "repository": {
         "type": "git",
         "url": "https://github.com/ruanvictorreis/estoque-facil-backend/"
@@ -19,8 +20,7 @@
         "postinstall": "bower install"
     },
     "dependencies": {
-        "bower": "^1.7.9",
-        "express": "^4.14.0"
+        "bower": "^1.7.9"
     },
     "devDependencies": {
         "bower": "^1.7.9",
@@ -36,8 +36,8 @@
         "load-grunt-tasks": "^3.5.0"
     },
     "engines": {
-        "node": "^4.4.6",
-        "npm": "^2.15.5"
+        "node": "^7.3.0",
+        "npm": "^5.5.1"
     },
     "private": false
 }
