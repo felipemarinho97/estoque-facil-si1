@@ -23,7 +23,7 @@ app.controller("SearchProductCtrl", function ($scope, $uibModal, $http, toastr,$
         var modalInstance = $uibModal.open({
             ariaLabelledBy: 'Adicionar Produto',
             ariaDescribedBy: 'Formulario para adição de um novo produto',
-            templateUrl: 'core/main/createProductView.html',
+            templateUrl: 'app/core/main/createProductView.html',
             controller: 'CreateProductCtrl',
             controllerAs: 'cpCtrl'
         });
@@ -47,7 +47,7 @@ app.controller("SearchProductCtrl", function ($scope, $uibModal, $http, toastr,$
         var modalInstance = $uibModal.open({
             ariaLabelledBy: 'Atribuir preço á Produto',
             ariaDescribedBy: 'Formulario para Atribuir preço á Produto',
-            templateUrl: 'core/main/updateProductPriceView.html',
+            templateUrl: 'app/core/main/updateProductPriceView.html',
             controller: 'UpdateProductPriceCtrl',
             resolve: {
                 produto: function () {
@@ -90,7 +90,7 @@ app.controller("SearchProductCtrl", function ($scope, $uibModal, $http, toastr,$
         $uibModal.open({
             ariaLabelledBy: 'Criar lote',
             ariaDescribedBy: 'Formulario para criar lote',
-            templateUrl: 'core/main/createLoteView.html',
+            templateUrl: 'app/core/main/createLoteView.html',
             controller: 'CriarLoteCtrl',
             resolve: {
                 produto: function () {
