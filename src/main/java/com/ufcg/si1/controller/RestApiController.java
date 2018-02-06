@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.ufcg.si1.model.Produto;
+import com.ufcg.si1.service.LoteService;
+import com.ufcg.si1.service.LoteServiceImpl;
 import com.ufcg.si1.service.ProdutoService;
 import com.ufcg.si1.service.ProdutoServiceImpl;
 import com.ufcg.si1.util.CustomErrorType;
@@ -30,6 +32,7 @@ import exceptions.ObjetoInvalidoException;
 public class RestApiController {
 
     ProdutoService produtoService = new ProdutoServiceImpl();
+    LoteService loteService = new LoteServiceImpl();
 
     // -------------------Retrieve All
     // Products---------------------------------------------
@@ -147,10 +150,27 @@ public class RestApiController {
                     HttpStatus.NOT_FOUND);
         }
 
-        Lote lote = produtoService.saveLote(new Lote(product, loteDTO.getNumeroDeItens(),
+        Lote lote = loteService.saveLote(new Lote(product, loteDTO.getNumeroDeItens(),
                 loteDTO.getDataDeValidade()));
+        
+        if (loteDTO.getNumeroDeItens() != 0) {
+        	 Produto produtoDisponivel = product;
+             produtoService.updateProduto(produtoDisponivel);
+        	 produtoDisponivel.situacao = Produto.DISPONIVEL;
+             produtoService.updateProduto(produtoDisponivel);
+        }
 
         return new ResponseEntity<>(lote, HttpStatus.CREATED);
+    }
+    
+    @RequestMapping(value = "/lote/", method = RequestMethod.GET)
+    public ResponseEntity<List<Lote>> listAllLotess() {
+        List<Lote> lotes = loteService.findAllLotes();
 
+        if (lotes.isEmpty()) {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+            // You many decide to return HttpStatus.NOT_FOUND
+        }
+        return new ResponseEntity<List<Lote>>(lotes, HttpStatus.OK);
     }
 }
