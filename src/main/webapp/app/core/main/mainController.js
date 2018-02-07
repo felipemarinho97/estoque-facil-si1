@@ -87,7 +87,7 @@ app.controller("SearchProductCtrl", function ($scope, $uibModal, $http, toastr,$
 
     $scope.openCriarLoteDialog = function(product) {
 
-        $uibModal.open({
+        var modalInstance = $uibModal.open({
             ariaLabelledBy: 'Criar lote',
             ariaDescribedBy: 'Formulario para criar lote',
             templateUrl: 'app/core/main/createLoteView.html',
@@ -96,6 +96,13 @@ app.controller("SearchProductCtrl", function ($scope, $uibModal, $http, toastr,$
                 produto: function () {
                     return angular.copy(product);
                 }
+            }
+        });
+
+        modalInstance.result.then(function (result) {
+            console.log(result)
+            if (result.status === 201) {
+                loadProductsList();
             }
         });
     };
@@ -220,7 +227,10 @@ app.controller("CriarLoteCtrl", function ($scope, $uibModalInstance, $http, toas
                 console.log(response)
                 if (response.status === 201) {
                     console.log("Lote criado com sucesso!");
-                    $uibModalInstance.close();
+                    toastr.success("Lote criado com sucesso!");
+                    $uibModalInstance.close({
+                        status: 201
+                    });
                 }
             }, function error(error) {
                 console.log(error);
