@@ -153,12 +153,18 @@ public class RestApiController {
         Lote lote = loteService.saveLote(new Lote(product, loteDTO.getNumeroDeItens(),
                 loteDTO.getDataDeValidade()));
         
-        if (loteDTO.getNumeroDeItens() != 0) {
-        	 Produto produtoDisponivel = product;
-             produtoService.updateProduto(produtoDisponivel);
-        	 produtoDisponivel.situacao = Produto.DISPONIVEL;
-             produtoService.updateProduto(produtoDisponivel);
-        }
+        try {
+			if(product.getSituacao() == Produto.EM_FALTA) {
+		        if (loteDTO.getNumeroDeItens() > 0) {
+		        	 Produto produtoDisponivel = product;
+		             produtoService.updateProduto(produtoDisponivel);
+		        	 produtoDisponivel.situacao = Produto.DISPONIVEL;
+		             produtoService.updateProduto(produtoDisponivel);
+		        }
+			}
+		} catch (ObjetoInvalidoException e) {
+			e.printStackTrace();
+		}
 
         return new ResponseEntity<>(lote, HttpStatus.CREATED);
     }
