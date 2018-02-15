@@ -127,20 +127,6 @@ public class RestApiController {
         return new ResponseEntity<Produto>(HttpStatus.NO_CONTENT);
     }
 
-    @RequestMapping(value = "/produto/indisponivel/", method = RequestMethod.POST)
-    public ResponseEntity<?> indisponibilizarProduto(@RequestBody Produto produtoIndisponivel) {
-        produtoIndisponivel.situacao = Produto.EM_FALTA;
-        produtoService.updateProduto(produtoIndisponivel);
-        return new ResponseEntity<Produto>(produtoIndisponivel, HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "/produto/disponivel/", method = RequestMethod.POST)
-    public ResponseEntity<?> disponibilizarProduto(@RequestBody Produto produtoDisponivel) {
-        produtoDisponivel.situacao = Produto.DISPONIVEL;
-        produtoService.updateProduto(produtoDisponivel);
-        return new ResponseEntity<Produto>(produtoDisponivel, HttpStatus.OK);
-    }
-
     @RequestMapping(value = "/produto/{id}/lote", method = RequestMethod.POST)
     public ResponseEntity<?> criarLote(@PathVariable("id") long produtoId, @RequestBody LoteDTO loteDTO) {
         Produto product = produtoService.findById(produtoId);
@@ -157,7 +143,6 @@ public class RestApiController {
 			if(product.getSituacao() == Produto.EM_FALTA) {
 		        if (loteDTO.getNumeroDeItens() > 0) {
 		        	 Produto produtoDisponivel = product;
-		             produtoService.updateProduto(produtoDisponivel);
 		        	 produtoDisponivel.situacao = Produto.DISPONIVEL;
 		             produtoService.updateProduto(produtoDisponivel);
 		        }
