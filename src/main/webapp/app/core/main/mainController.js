@@ -29,7 +29,7 @@ app.controller("SearchProductCtrl", function ($scope, $uibModal, $http, toastr,$
         });
 
         modalInstance.result.then(function (result) {
-            if (result.status === 201) {
+            if (result === 201) {
               loadProductsList();
             }
         });
@@ -135,7 +135,7 @@ app.controller("CreateProductCtrl", function ($uibModalInstance, $http, toastr) 
         }
     ];
 
-    this.createProduct = function (product, situacao) {
+    this.createProduct = function (product) {
 
         // if (situacao) {
         //     if (situacao === 1) {
@@ -145,13 +145,14 @@ app.controller("CreateProductCtrl", function ($uibModalInstance, $http, toastr) 
         //     }
         // }
 
-        product.situacao = situacao === 1 ? 1 : 2;
+        // product.situacao = situacao === 1 ? 1 : 2;
 
         $http.post("http://localhost:8080/api/produto/", JSON.stringify(product))
             .then(function success(response) {
                 if (response.status === 201) {
                     toastr.success("Produto adicionado com sucesso!");
                     vm.product = {};
+                    console.log(response)
                     $uibModalInstance.close(201);
                 }
             }, function error(error) {
