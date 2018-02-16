@@ -60,7 +60,7 @@ public class RestApiController {
         }
 
         try {
-            produto.mudaSituacao(Produto.EM_FALTA);
+            produto.mudaSituacao(Produto.INDISPONIVEL);
         } catch (ObjetoInvalidoException e) {
             return new ResponseEntity(new CustomErrorType("Error: Produto" + produto.getNome() + " do fabricante "
                     + produto.getFabricante() + " alguma coisa errada aconteceu!"), HttpStatus.NOT_ACCEPTABLE);
@@ -140,7 +140,7 @@ public class RestApiController {
                 loteDTO.getDataDeValidade()));
         
         try {
-			if(product.getSituacao() == Produto.EM_FALTA) {
+			if(product.getSituacao() == Produto.INDISPONIVEL) {
 		        if (loteDTO.getNumeroDeItens() > 0) {
 		        	 Produto produtoDisponivel = product;
 		        	 produtoDisponivel.situacao = Produto.DISPONIVEL;
