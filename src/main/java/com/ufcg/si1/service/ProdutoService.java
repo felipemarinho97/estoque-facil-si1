@@ -1,6 +1,5 @@
 package com.ufcg.si1.service;
 
-
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,7 +9,7 @@ public interface ProdutoService {
 
 	List<Produto> findAllProdutos();
 
-    void saveProduto(Produto produto);
+	void saveProduto(Produto produto);
 
 	Produto findById(long id);
 
@@ -18,7 +17,7 @@ public interface ProdutoService {
 
 	void deleteProdutoById(long id);
 
-    int size();
+	int size();
 
 	Iterator<Produto> getIterator();
 

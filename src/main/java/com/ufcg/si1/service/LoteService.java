@@ -1,6 +1,5 @@
 package com.ufcg.si1.service;
 
-
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,13 +9,13 @@ public interface LoteService {
 
 	List<Lote> findAllLotes();
 
-    Lote findById(long id);
+	Lote findById(long id);
 
 	void updateProduto(Lote user);
 
 	void deleteLoteById(long id);
 
-    int size();
+	int size();
 
 	Iterator<Lote> getIterator();
 
