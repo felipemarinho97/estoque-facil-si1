@@ -53,8 +53,16 @@ public class RestApiController {
 
     @RequestMapping(value = "/produto/", method = RequestMethod.POST)
     public ResponseEntity<?> criarProduto(@RequestBody Produto produto, UriComponentsBuilder ucBuilder) {
-
-        if (produtoService.doesProdutoExist(produto)) {
+    	
+    	boolean produtoExiste = false;
+    	
+    	for (Produto p : produtoService.findAllProdutos()) {
+			if (p.getCodigoBarra().equals(produto.getCodigoBarra())) {
+				produtoExiste = true;
+			}
+		}
+    	
+        if (produtoExiste) {
             return new ResponseEntity(new CustomErrorType("O produto " + produto.getNome() + " do fabricante "
                     + produto.getFabricante() + " ja esta cadastrado!"), HttpStatus.CONFLICT);
         }
