@@ -38,17 +38,17 @@ public class LoteServiceImpl implements LoteService {
 	}
 
 	@Override
-	public void updateProduto(Lote user) {
-		int index = lotes.indexOf(user);
-		lotes.set(index, user);
+	public void updateProduto(Lote lote) {
+		int index = lotes.indexOf(lote);
+		lotes.set(index, lote);
 
 	}
 
 	@Override
 	public void deleteLoteById(long id) {
 		for (Iterator<Lote> iterator = lotes.iterator(); iterator.hasNext();) {
-			Lote p = iterator.next();
-			if (p.getId() == id) {
+			Lote lote = iterator.next();
+			if (lote.getId() == id) {
 				iterator.remove();
 			}
 		}
