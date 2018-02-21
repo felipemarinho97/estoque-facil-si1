@@ -1,4 +1,4 @@
-app.controller("SearchProductCtrl", function ($scope, $uibModal, $http, toastr,$location, mainService) {
+app.controller("SearchProductCtrl", function ($scope, $uibModal, $http, toastr, $location, mainService) {
 
     var urlServer = "http://localhost:8080/api/";
     // $scope.title = "Search Product";
