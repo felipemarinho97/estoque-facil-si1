@@ -1,5 +1,10 @@
 const app = angular.module("efApp", [
-  "ngRoute", 
+  "searchProduct",
+  "createProduct",
+  "createLote",
+  "updateProductPrice",
+
+  "ngRoute",
   "ngMessages",
   "ngAnimate",
   "toastr",

@@ -2,9 +2,9 @@
 
 angular.module("searchProduct").
   component("searchProduct", {
-    templateUrl: "/templates/search-product-view/searchProductView.html",
+    templateUrl: "/templates/search-product-view/search-product-view.html",
     controller: function ($scope, $uibModal, $http, toastr, $location, mainService) {
-
+        var $ctrl = this;
         var urlServer = "http://localhost:8080/api/";
         // $scope.title = "Search Product";
         $scope.productsList = [];
@@ -28,12 +28,11 @@ angular.module("searchProduct").
             var modalInstance = $uibModal.open({
                 ariaLabelledBy: 'Adicionar Produto',
                 ariaDescribedBy: 'Formulario para adição de um novo produto',
-                templateUrl: 'app/core/main/createProductView.html',
-                controller: 'CreateProductCtrl',
-                controllerAs: 'cpCtrl'
+                component: 'createProduct',
             });
 
             modalInstance.result.then(function (result) {
+                console.log(result);
                 if (result === 201) {
                   loadProductsList();
                 }
@@ -52,8 +51,7 @@ angular.module("searchProduct").
             var modalInstance = $uibModal.open({
                 ariaLabelledBy: 'Atribuir preço á Produto',
                 ariaDescribedBy: 'Formulario para Atribuir preço á Produto',
-                templateUrl: 'app/core/main/updateProductPriceView.html',
-                controller: 'UpdateProductPriceCtrl',
+                component: 'updateProductPrice',
                 resolve: {
                     produto: function () {
                         return angular.copy(product);
@@ -95,8 +93,7 @@ angular.module("searchProduct").
             var modalInstance = $uibModal.open({
                 ariaLabelledBy: 'Criar lote',
                 ariaDescribedBy: 'Formulario para criar lote',
-                templateUrl: 'app/core/main/createLoteView.html',
-                controller: 'CriarLoteCtrl',
+                component: 'createLote',
                 resolve: {
                     produto: function () {
                         return angular.copy(product);
@@ -124,4 +121,3 @@ angular.module("searchProduct").
         loadProductsList();
     }
   });
-app.controller("SearchProductCtrl", );
