@@ -2,7 +2,7 @@
 
 angular.module("searchProduct").
   component("searchProduct", {
-    templateUrl: "/templates/search-product-view/search-product-view.html",
+    templateUrl: "templates/search-product-view.html",
     controller: function ($scope, $uibModal, $http, toastr, $location, mainService) {
         var $ctrl = this;
         var urlServer = "http://localhost:8080/api/";
