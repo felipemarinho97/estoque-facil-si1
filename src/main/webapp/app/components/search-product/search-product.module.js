@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('searchProduct', ['ui.bootstrap']);
+angular.module('searchProduct', ['ui.bootstrap', 'products']);
