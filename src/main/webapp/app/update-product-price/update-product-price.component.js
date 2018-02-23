@@ -2,7 +2,7 @@
 
 angular.module("updateProductPrice")
   .component("updateProductPrice", {
-      templateUrl: "templates/update-product-price-modal.html",
+      templateUrl: "app/update-product-price/update-product-price-modal.html",
       bindings: {
         close: '&',
         dismiss: '&',

@@ -2,7 +2,7 @@
 
 angular.module("createProduct")
   .component("createProduct", {
-    templateUrl: "templates/create-product-modal.html",
+    templateUrl: "app/create-product/create-product-modal.html",
     bindings: {
       close: '&',
       dismiss: '&',

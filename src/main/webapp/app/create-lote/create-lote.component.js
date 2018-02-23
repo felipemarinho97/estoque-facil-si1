@@ -2,7 +2,7 @@
 
 angular.module("createLote")
   .component("createLote", {
-    templateUrl: "templates/create-lote-modal.html",
+    templateUrl: "app/create-lote/create-lote-modal.html",
     bindings: {
       close: '&',
       dismiss: '&',
