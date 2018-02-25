@@ -11,7 +11,7 @@ public interface LoteService {
 
 	Lote findById(long id);
 
-	void updateProduto(Lote user);
+	void updateProduto(Lote lote);
 
 	void deleteLoteById(long id);
 
