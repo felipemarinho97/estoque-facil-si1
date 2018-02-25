@@ -8,7 +8,7 @@ angular.module("updateProductPrice")
         dismiss: '&',
         resolve: '<'
       },
-      controller: function($scope, mainService, toastr) {
+      controller: function($scope, products, toastr) {
         var $ctrl = this;
 
         $ctrl.$onInit = function() {
@@ -22,7 +22,7 @@ angular.module("updateProductPrice")
 
             console.log(product)
 
-            mainService.updateProductById(product.id, product)
+            products.updateProductById(product.id, product)
               .then(function success(response) {
 
                 if (response.status === 200) {

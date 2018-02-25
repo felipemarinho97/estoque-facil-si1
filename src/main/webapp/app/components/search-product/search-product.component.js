@@ -3,7 +3,7 @@
 angular.module("searchProduct").
   component("searchProduct", {
     templateUrl: "app/components/search-product/search-product-view.html",
-    controller: function ($scope, $uibModal, $http, toastr, $location, mainService) {
+    controller: function ($scope, $uibModal, $http, toastr, $location, products) {
         var $ctrl = this;
         var urlServer = "http://localhost:8080/api/";
         // $scope.title = "Search Product";
@@ -16,7 +16,7 @@ angular.module("searchProduct").
             //         $scope.productsList = response.data;
             //     });
 
-            mainService.getAllProducts()
+            products.getAllProducts()
                 .then(function successCallback(response) {
                     $scope.productsList = response.data;
                 }, function errorCallback(error) {
@@ -70,7 +70,7 @@ angular.module("searchProduct").
         $scope.pesquisarProdutoPorId = function(id) {
             // implementar
             console.log(id)
-            $http.get("http://localhost:8080/api/produto/" + id)
+            products.findProductById(id)
                 .then(function successCallback(response) {
                     $scope.productsList = [
                         response.data
