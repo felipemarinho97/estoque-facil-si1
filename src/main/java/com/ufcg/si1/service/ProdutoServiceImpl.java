@@ -7,7 +7,6 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.stereotype.Service;
 
-import com.ufcg.si1.model.Lote;
 import com.ufcg.si1.model.Produto;
 
 @Service("produtoService")
@@ -16,12 +15,9 @@ public class ProdutoServiceImpl implements ProdutoService {
 	private static final AtomicLong counter = new AtomicLong();
 
 	private static List<Produto> produtos;
-	
-	private static List<Lote> lotes;
 
 	static {
 		produtos = populateDummyProdutos();
-		lotes = new ArrayList<>();
 	}
 
 	private static List<Produto> populateDummyProdutos() {
@@ -41,7 +37,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 	}
 
 	public void saveProduto(Produto produto) {
-		produto.mudaId(counter.incrementAndGet());
+		produto.setId(counter.incrementAndGet());
 		produtos.add(produto);
 	}
 
@@ -60,7 +56,6 @@ public class ProdutoServiceImpl implements ProdutoService {
 		}
 	}
 
-	// este metodo nunca eh chamado, mas se precisar estah aqui
 	public int size() {
 		return produtos.size();
 	}
@@ -91,10 +86,4 @@ public class ProdutoServiceImpl implements ProdutoService {
 		return false;
 	}
 	
-	public Lote saveLote(Lote lote) {
-		lote.setId(counter.incrementAndGet());
-		lotes.add(lote);
-
-		return lote;
-	}
 }

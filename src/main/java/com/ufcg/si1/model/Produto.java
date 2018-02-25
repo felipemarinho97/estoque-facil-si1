@@ -2,8 +2,6 @@ package com.ufcg.si1.model;
 
 import java.math.BigDecimal;
 
-import exceptions.ObjetoInvalidoException;
-
 public class Produto {
 
 	private long id;
@@ -18,10 +16,9 @@ public class Produto {
 
 	private String categoria;
 
-	public int situacao; // usa variaveis estaticas abaixo
-	/* situacoes do produto */
-	public static final int DISPONIVEL = 1;
-	public static final int INDISPONIVEL = 2;
+	public boolean situacao; 
+	public static final boolean DISPONIVEL = true;
+	public static final boolean INDISPONIVEL = false;
 
 	public Produto() {
 		this.id = 0;
@@ -43,7 +40,7 @@ public class Produto {
 		return nome;
 	}
 
-	public void mudaNome(String nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
@@ -59,7 +56,7 @@ public class Produto {
 		return id;
 	}
 
-	public void mudaId(long codigo) {
+	public void setId(long codigo) {
 		this.id = codigo;
 	}
 
@@ -67,7 +64,7 @@ public class Produto {
 		return fabricante;
 	}
 
-	public void mudaFabricante(String fabricante) {
+	public void setFabricante(String fabricante) {
 		this.fabricante = fabricante;
 	}
 
@@ -83,25 +80,19 @@ public class Produto {
 		return this.categoria;
 	}
 
-	public void mudaCategoria(String categoria) {
+	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
 		
-	public void mudaSituacao(int situacao) throws ObjetoInvalidoException {
-		switch (situacao) {
-		case 1:
+	public void setSituacao(boolean estahDisponivel) {
+		if (estahDisponivel) {
 			this.situacao = Produto.DISPONIVEL;
-			break;
-		case 2:
+		} else {
 			this.situacao = Produto.INDISPONIVEL;
-			break;
-
-		default:
-			throw new ObjetoInvalidoException("Situacao Invalida");
 		}
 	}
 
-	public int getSituacao() throws ObjetoInvalidoException {
+	public boolean getSituacao() {
 		return this.situacao;
 	}
 
