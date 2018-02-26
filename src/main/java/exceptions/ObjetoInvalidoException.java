@@ -2,6 +2,11 @@ package exceptions;
 
 public class ObjetoInvalidoException extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1101001197502061969L;
+
 	public ObjetoInvalidoException(String erro) {
 		super("ExcecaoDados: " + erro);
 	}

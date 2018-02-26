@@ -32,7 +32,7 @@ public class ProdutoController {
 		List<Produto> produtos = produtoService.findAllProdutos();
 
 		if (produtos.isEmpty()) {
-			return new ResponseEntity(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<Produto>>(produtos, HttpStatus.OK);
 	}
@@ -42,7 +42,7 @@ public class ProdutoController {
 	public ResponseEntity<?> criarProduto(@RequestBody Produto produto, UriComponentsBuilder ucBuilder) {
 		
 		if (produtoService.doesProdutoExist(produto)) {
-			return new ResponseEntity(new CustomErrorType("O produto " + produto.getNome() + " do fabricante "
+			return new ResponseEntity<>(new CustomErrorType("O produto " + produto.getNome() + " do fabricante "
 					+ produto.getFabricante() + " ja esta cadastrado!"), HttpStatus.CONFLICT);
 		}
 		
@@ -62,7 +62,7 @@ public class ProdutoController {
 		Produto produto = produtoService.findById(id);
 
 		if (produto == null) {
-			return new ResponseEntity(new CustomErrorType("Produto com id " + id + " nao encontrado."),
+			return new ResponseEntity<>(new CustomErrorType("Produto com id " + id + " nao encontrado."),
 					HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<Produto>(produto, HttpStatus.OK);
@@ -74,7 +74,7 @@ public class ProdutoController {
 		Produto currentProduto = produtoService.findById(id);
 
 		if (currentProduto == null) {
-			return new ResponseEntity(new CustomErrorType("Impossivel atualizar. Produto com id " + id + " nao encontrado."),
+			return new ResponseEntity<>(new CustomErrorType("Impossivel atualizar. Produto com id " + id + " nao encontrado."),
 					HttpStatus.NOT_FOUND);
 		}
 
@@ -94,7 +94,7 @@ public class ProdutoController {
 		Produto produto = produtoService.findById(id);
 
 		if (produto == null) {
-			return new ResponseEntity(new CustomErrorType("Impossivel deletar. Produto com id " + id + " nao encontrado."),
+			return new ResponseEntity<>(new CustomErrorType("Impossivel deletar. Produto com id " + id + " nao encontrado."),
 					HttpStatus.NOT_FOUND);
 		}
 		

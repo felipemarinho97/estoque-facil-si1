@@ -33,7 +33,7 @@ public class LoteController {
 		Produto produto = produtoService.findById(produtoId);
 
 		if (produto == null) {
-			return new ResponseEntity(
+			return new ResponseEntity<>(
 					new CustomErrorType("Impossivel criar lote. Produto com id " + produtoId + " nao encontrado."),
 					HttpStatus.NOT_FOUND);
 		}
@@ -55,7 +55,7 @@ public class LoteController {
 		List<Lote> lotes = loteService.findAllLotes();
 
 		if (lotes.isEmpty()) {
-			return new ResponseEntity(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<Lote>>(lotes, HttpStatus.OK);
 	}
