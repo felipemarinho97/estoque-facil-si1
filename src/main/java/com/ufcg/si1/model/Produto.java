@@ -24,8 +24,7 @@ public class Produto {
 	private String nome;
 
 	@Column
-    @NotEmpty
-	private BigDecimal preco;
+    private BigDecimal preco;
 
 	@Column
     @NotEmpty

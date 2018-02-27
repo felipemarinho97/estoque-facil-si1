@@ -21,9 +21,8 @@ public class Lote {
     @Transient
     private Produto produto;
     
-    @Column
-    @NotEmpty
-    private int numeroDeItens;
+    @Column    
+    private Integer numeroDeItens;
     
     @Column
     @NotEmpty

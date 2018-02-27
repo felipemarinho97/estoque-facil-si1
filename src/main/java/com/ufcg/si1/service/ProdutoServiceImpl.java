@@ -66,6 +66,5 @@ public class ProdutoServiceImpl implements ProdutoService {
 	
 	public void deleteAllUsers() {
 		return;
-	}
-	
+	}	
 }
