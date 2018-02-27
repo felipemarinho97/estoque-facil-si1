@@ -10,7 +10,7 @@ angular.module("createLote")
     },
     controller: function ($scope, $http, toastr) {
       var $ctrl = this;
-
+      
       $ctrl.$onInit = function() {
         $ctrl.produto = $ctrl.resolve.produto;
         $scope.produto = $ctrl.produto;
