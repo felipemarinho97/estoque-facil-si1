@@ -2,6 +2,11 @@ package exceptions;
 
 public class ObjetoInexistenteException extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7202740410790066574L;
+
 	public ObjetoInexistenteException(String erro) {
 		super("ExcecaoDados: " + erro);
 	}

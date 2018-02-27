@@ -2,6 +2,11 @@ package exceptions;
 
 public class ObjetoJaExistenteException extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5882466550677600807L;
+
 	public ObjetoJaExistenteException(String erro) {
 		super("ExcecaoDados: " + erro);
 	}

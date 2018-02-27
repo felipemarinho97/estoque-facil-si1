@@ -2,6 +2,11 @@ package exceptions;
 
 public class Rep extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6850834332514013914L;
+
 	public Rep(String erro) {
 		super("ExcecaoDados: " + erro);
 	}
