@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class LoginController {
 	@RequestMapping(method = RequestMethod.GET, path = "/login/")
 	public String login() {
-		return "../webapp/index";
+		return "app/components/login/login-view";
 	}
 }
