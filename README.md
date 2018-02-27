@@ -8,12 +8,12 @@ npm install
 Para mais informações da estrutura do AngularJS acesse o README na pasta **src/main/webapp**
 
 # Instalação das dependências do Backend
-É necessário a instalação do PostgreSQL e subir uma instância local na porta 5432 (normalmente é a porta padrão do PostgreSQL).
-Seguindo as configurações que estão no arquivo src/main/resources/application.properties basta que se der um
+É necessário a instalação do PostgreSQL e subir uma instância local na porta 5432 (normalmente é a porta padrão do PostgreSQL). Seguindo as configurações que estão no arquivo src/main/resources/application.properties basta o seguinte comando:
+
 ```
-createbd nome-do-db 
+createdb -U postgres estoque-facil-db
 ```
-(Ver arquivo citado acima pra não haver conflitos no nome);
+Link de ajuda: https://www.digitalocean.com/community/tutorials/como-instalar-e-utilizar-o-postgresql-no-ubuntu-16-04-pt
 
 # Execução Local (Passos) do Backend
 ### Spring Boot
