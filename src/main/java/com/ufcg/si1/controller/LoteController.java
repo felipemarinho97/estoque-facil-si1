@@ -15,9 +15,7 @@ import com.ufcg.si1.model.Lote;
 import com.ufcg.si1.model.Produto;
 import com.ufcg.si1.model.DTO.LoteDTO;
 import com.ufcg.si1.service.LoteService;
-import com.ufcg.si1.service.LoteServiceImpl;
 import com.ufcg.si1.service.ProdutoService;
-import com.ufcg.si1.service.ProdutoServiceImpl;
 import com.ufcg.si1.util.CustomErrorType;
 
 @RestController
@@ -25,8 +23,13 @@ import com.ufcg.si1.util.CustomErrorType;
 @CrossOrigin
 public class LoteController {
 	
-	ProdutoService produtoService = new ProdutoServiceImpl();
-	LoteService loteService = new LoteServiceImpl();
+	private ProdutoService produtoService;
+	private LoteService loteService;
+	
+	public LoteController(ProdutoService produtoService, LoteService loteService) {
+		this.produtoService = produtoService;
+		this.loteService = loteService;
+	}
 	
 	@RequestMapping(value = "/produto/{id}/lote", method = RequestMethod.POST)
 	public ResponseEntity<?> criarLote(@PathVariable("id") long produtoId, @RequestBody LoteDTO loteDTO) {

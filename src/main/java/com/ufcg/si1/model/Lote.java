@@ -1,10 +1,31 @@
 package com.ufcg.si1.model;
 
-public class Lote {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
-    private long id;
+import org.hibernate.validator.constraints.NotEmpty;
+
+@Entity
+@Table(name = "LOTE_TABLE")
+public class Lote {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+	
+    @Transient
     private Produto produto;
-    private int numeroDeItens;
+    
+    @Column    
+    private Integer numeroDeItens;
+    
+    @Column
+    @NotEmpty
     private String dataDeValidade;
 
     public Lote() {
@@ -12,17 +33,15 @@ public class Lote {
     }
 
     public Lote(Produto produto, int numeroDeItens, String dataDeValidade) {
-        super();
+        this();
         this.produto = produto;
         this.numeroDeItens = numeroDeItens;
         this.dataDeValidade = dataDeValidade;
     }
 
     public Lote(long id, Produto produto, int numeroDeItens, String dataDeValidade) {
-        this.id = id;
-        this.produto = produto;
-        this.numeroDeItens = numeroDeItens;
-        this.dataDeValidade = dataDeValidade;
+        this(produto, numeroDeItens, dataDeValidade);
+    	this.id = id;       
     }
 
     public long getId() {
