@@ -2,22 +2,48 @@ package com.ufcg.si1.model;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+@Entity
+@Table(name = "PRODUCT_TABLE")
 public class Produto {
-
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO )
 	private long id;
-
+	
+	@Column
+    @NotEmpty
 	private String nome;
 
+	@Column
+    @NotEmpty
 	private BigDecimal preco;
 
+	@Column
+    @NotEmpty
 	private String codigoBarra;
-
+	
+	@Column
+	@NotEmpty
 	private String fabricante;
-
+	
+	@Column
+	@NotEmpty
 	private String categoria;
-
+	
+	@Column
 	public boolean situacao; 
+	
 	public static final boolean DISPONIVEL = true;
+	
 	public static final boolean INDISPONIVEL = false;
 
 	public Produto() {

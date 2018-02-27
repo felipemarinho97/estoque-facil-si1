@@ -15,7 +15,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.ufcg.si1.model.Produto;
 import com.ufcg.si1.service.ProdutoService;
-import com.ufcg.si1.service.ProdutoServiceImpl;
 import com.ufcg.si1.util.CustomErrorType;
 
 @RestController
@@ -23,9 +22,11 @@ import com.ufcg.si1.util.CustomErrorType;
 @CrossOrigin
 public class ProdutoController {
 
-	ProdutoService produtoService = new ProdutoServiceImpl();
-
+	private ProdutoService produtoService;
 	
+	public ProdutoController(ProdutoService produtoService) {
+		this.produtoService = produtoService;
+	}	
 
 	@RequestMapping(value = "/produto/", method = RequestMethod.GET)
 	public ResponseEntity<List<Produto>> listarProdutos() {
@@ -36,7 +37,6 @@ public class ProdutoController {
 		}
 		return new ResponseEntity<List<Produto>>(produtos, HttpStatus.OK);
 	}
-
 
 	@RequestMapping(value = "/produto/", method = RequestMethod.POST)
 	public ResponseEntity<?> criarProduto(@RequestBody Produto produto, UriComponentsBuilder ucBuilder) {
@@ -101,7 +101,4 @@ public class ProdutoController {
 		produtoService.deleteProdutoById(id);
 		return new ResponseEntity<Produto>(HttpStatus.OK);
 	}
-
-	
-
 }
