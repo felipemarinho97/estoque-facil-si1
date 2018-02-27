@@ -23,8 +23,8 @@ import com.ufcg.si1.util.CustomErrorType;
 @CrossOrigin
 public class LoteController {
 	
-	ProdutoService produtoService;
-	LoteService loteService;
+	private ProdutoService produtoService;
+	private LoteService loteService;
 	
 	public LoteController(ProdutoService produtoService, LoteService loteService) {
 		this.produtoService = produtoService;
