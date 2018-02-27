@@ -36,7 +36,7 @@ angular.module("createProduct")
 
             // product.situacao = situacao === 1 ? 1 : 2;
 
-            $http.post("http://localhost:8080/api/produto/", JSON.stringify(product))
+            $http.post("https://estoque-facil-si.herokuapp.com/api/produto/", JSON.stringify(product))
                 .then(function success(response) {
                     if (response.status === 201) {
                         toastr.success("Produto adicionado com sucesso!");

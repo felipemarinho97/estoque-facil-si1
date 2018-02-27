@@ -36,7 +36,7 @@ angular.module("createLote")
                 numeroDeItens: numeroDeItens
             }
 
-            $http.post("http://localhost:8080/api/produto/" + $ctrl.produto.id + "/lote", JSON.stringify(lote))
+            $http.post("https://estoque-facil-si.herokuapp.com/api/produto/" + $ctrl.produto.id + "/lote", JSON.stringify(lote))
                 .then(function success(response) {
                     console.log(response)
                     if (response.status === 201) {
