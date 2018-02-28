@@ -4,8 +4,8 @@ app.config(function ($routeProvider) {
     }).when("/products",{
       template: "<search-product></search-product>"
     }).when("/login",{
-      templateUrl: 'app/components/login/login-view.html',
-      controller: "loginCtrl"
+      template: "<login></login>"
+//      controller: "loginCtrl"
     	  
     })
     //     .when("/products/create-product",{
