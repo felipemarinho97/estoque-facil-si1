@@ -4,14 +4,8 @@ app.config(function ($routeProvider) {
     }).when("/products",{
       template: "<search-product></search-product>"
     }).when("/login",{
-      template: "<login></login>"
-//      controller: "loginCtrl"
-    	  
+      template: "<login></login>"    	  
     })
-    //     .when("/products/create-product",{
-    //     templateUrl: "view/createProductView.html",
-    //     controller: "CreateProductCtrl"
-    // })
         .otherwise({
         redirectTo: '/'
     });
