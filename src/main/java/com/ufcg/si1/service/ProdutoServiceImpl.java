@@ -27,20 +27,20 @@ public class ProdutoServiceImpl implements ProdutoService {
 	
 	@Override
 	public void saveProduto(Produto produto) {
-		produto.setId(counter.incrementAndGet());		
+		//produto.setId(counter.incrementAndGet());		
 		this.produtoRepository.save(produto);
 	}
 	
 	@Override
 	public void updateProduto(Produto produto) {
-		if (this.produtoRepository.exists(produto.getId())) {
-			this.produtoRepository.delete(produto.getId());
+		if (this.produtoRepository.exists(produto.getCodigoBarra())) {
+			this.produtoRepository.delete(produto.getCodigoBarra());
 			this.produtoRepository.save(produto);
 		}
 	}
 	
 	@Override
-	public void deleteProdutoById(long id) {
+	public void deleteProdutoById(String id) {
 		this.produtoRepository.delete(id);
 	}
 
@@ -55,13 +55,13 @@ public class ProdutoServiceImpl implements ProdutoService {
 	}	
 
 	@Override
-	public Produto findById(long id) {
+	public Produto findById(String id) {
 		return this.produtoRepository.findOne(id);
 	}
 	
 	@Override
 	public boolean doesProdutoExist(Produto produto) {
-		return this.produtoRepository.exists(produto.getId());
+		return this.produtoRepository.exists(produto.getCodigoBarra());
 	}
 	
 	public void deleteAllUsers() {

@@ -22,7 +22,7 @@ angular.module("updateProductPrice")
 
             console.log(product)
 
-            products.updateProductById(product.id, product)
+            products.updateProductById(product.codigoBarra, product)
               .then(function success(response) {
 
                 if (response.status === 200) {
@@ -34,7 +34,7 @@ angular.module("updateProductPrice")
                 }
               }, function error(error) {
                 console.log(error);
-                toastr.error("Problemas ao tentar atribuir preço ao produto: " + product.id);
+                toastr.error("Problemas ao tentar atribuir preço ao produto: " + product.codigoBarra);
               });
 
           };

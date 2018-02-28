@@ -11,11 +11,11 @@ public interface ProdutoService {
 
 	void saveProduto(Produto produto);
 
-	Produto findById(long id);
+	Produto findById(String id);
 
 	void updateProduto(Produto user);
 
-	void deleteProdutoById(long id);
+	void deleteProdutoById(String id);
 
 	int size();
 

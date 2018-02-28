@@ -51,13 +51,13 @@ public class ProdutoController {
 		produtoService.saveProduto(produto);
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("/api/produto/{id}").buildAndExpand(produto.getId()).toUri());
+		headers.setLocation(ucBuilder.path("/api/produto/{id}").buildAndExpand(produto.getCodigoBarra()).toUri());
 
 		return new ResponseEntity<Produto>(produto, HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/produto/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> consultarProduto(@PathVariable("id") long id) {
+	public ResponseEntity<?> consultarProduto(@PathVariable("id") String id) {
 
 		Produto produto = produtoService.findById(id);
 
@@ -69,7 +69,7 @@ public class ProdutoController {
 	}
 
 	@RequestMapping(value = "/produto/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<?> updateProduto(@PathVariable("id") long id, @RequestBody Produto produto) {
+	public ResponseEntity<?> updateProduto(@PathVariable("id") String id, @RequestBody Produto produto) {
 
 		Produto currentProduto = produtoService.findById(id);
 
@@ -89,7 +89,7 @@ public class ProdutoController {
 	}
 
 	@RequestMapping(value = "/produto/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<?> deleteProduto(@PathVariable("id") long id) {
+	public ResponseEntity<?> deleteProduto(@PathVariable("id") String id) {
 
 		Produto produto = produtoService.findById(id);
 

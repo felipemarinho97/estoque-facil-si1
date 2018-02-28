@@ -32,7 +32,7 @@ public class LoteController {
 	}
 	
 	@RequestMapping(value = "/produto/{id}/lote", method = RequestMethod.POST)
-	public ResponseEntity<?> criarLote(@PathVariable("id") long produtoId, @RequestBody LoteDTO loteDTO) {
+	public ResponseEntity<?> criarLote(@PathVariable("id") String produtoId, @RequestBody LoteDTO loteDTO) {
 		Produto produto = produtoService.findById(produtoId);
 
 		if (produto == null) {

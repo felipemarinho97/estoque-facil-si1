@@ -15,10 +15,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(name = "PRODUCT_TABLE")
 public class Produto {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO )
-	private long id;
-	
 	@Column
     @NotEmpty
 	private String nome;
@@ -26,6 +22,7 @@ public class Produto {
 	@Column
     private BigDecimal preco;
 
+	@Id
 	@Column
     @NotEmpty
 	private String codigoBarra;
@@ -45,22 +42,6 @@ public class Produto {
 	
 	public static final boolean INDISPONIVEL = false;
 
-	public Produto() {
-		this.id = 0;
-		this.preco = new BigDecimal(0);
-	}
-
-	public Produto(long id, String nome, String codigoBarra, String fabricante,
-			String nomeCategoria) {
-		this.id = id;
-		this.nome = nome;
-		this.preco = new BigDecimal(0);
-		this.codigoBarra = codigoBarra;
-		this.fabricante = fabricante;
-		this.categoria = nomeCategoria;
-		this.situacao = Produto.INDISPONIVEL;
-	}
-
 	public String getNome() {
 		return nome;
 	}
@@ -75,14 +56,6 @@ public class Produto {
 
 	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long codigo) {
-		this.id = codigo;
 	}
 
 	public String getFabricante() {

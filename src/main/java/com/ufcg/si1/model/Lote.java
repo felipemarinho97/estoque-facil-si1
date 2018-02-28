@@ -80,7 +80,7 @@ public class Lote {
     public String toString() {
         return "Lote{" +
                 "id=" + id +
-                ", produto=" + produto.getId() +
+                ", produto=" + produto.getCodigoBarra() +
                 ", numeroDeItens=" + numeroDeItens +
                 ", dataDeValidade='" + dataDeValidade + '\'' +
                 '}';
