@@ -23,7 +23,7 @@ angular.module("createProduct")
                 valor: 2
             }
         ];
-
+        
         $scope.createProduct = function (product) {
 
             // if (situacao) {

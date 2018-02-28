@@ -30,7 +30,7 @@ angular.module("searchProduct").
                 ariaDescribedBy: 'Formulario para adição de um novo produto',
                 component: 'createProduct',
             });
-
+            
             modalInstance.result.then(function (result) {
                 console.log(result);
                 if (result === 201) {
