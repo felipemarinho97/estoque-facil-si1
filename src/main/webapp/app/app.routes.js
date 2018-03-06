@@ -2,7 +2,7 @@ app.config(function ($routeProvider) {
 
     $routeProvider
     .when("/", {
-        templateUrl: "app/components/home/home-view.html"
+        template: "<home></home>"
     });
     
     $routeProvider    
@@ -12,24 +12,24 @@ app.config(function ($routeProvider) {
 
     $routeProvider
     .when("/create-lote", {
-    	templateUrl: "app/components/create-lote/create-lote-modal.html"       
+    	template: "<create-lote></create-lote>"       
     });
 
 
     $routeProvider
     .when("/create-product", {
-    	templateUrl: "app/components/create-product/create-product-modal.html"        
+    	template: "<create-product></create-product>"        
     });
 
 
     $routeProvider
     .when("/search-product", {
-    	templateUrl: "app/components/search-product/search-product-view.html"
+    	template: "<search-product></search-product>"
     });
 
     $routeProvider
     .when("/update-product", {
-    	templateUrl: "app/components/update-product-price/update-product-price-modal.html"       
+    	template: "<update-product></update-product>"       
     });
 
     $routeProvider

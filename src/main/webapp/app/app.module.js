@@ -4,6 +4,7 @@ var app = angular.module("efApp", [
   "createLote",
   "updateProductPrice",
   "home",
+  "listProducts",
   
 
   "ngRoute",
