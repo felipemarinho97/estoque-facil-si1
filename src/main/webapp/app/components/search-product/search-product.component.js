@@ -3,7 +3,7 @@
 angular.module("searchProduct").
   component("searchProduct", {
     templateUrl: "app/components/search-product/search-product-view.html",
-    controller: function ($scope, $uibModal, toastr, products) {
+    controller: function searchProductCtrl ($scope, $uibModal, toastr, products) {
         var $ctrl = this;        
         $scope.productsList = [];
         $scope.produtos = [];

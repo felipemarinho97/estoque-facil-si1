@@ -12,13 +12,13 @@ app.config(function ($routeProvider) {
 
     $routeProvider
     .when("/create-lote", {
-    	templateUrl: "app/components/create-lote/create-lote-modal.html"
+    	templateUrl: "app/components/create-lote/create-lote-modal.html"       
     });
 
 
     $routeProvider
     .when("/create-product", {
-    	templateUrl: "app/components/create-product/create-product-modal.html"
+    	templateUrl: "app/components/create-product/create-product-modal.html"        
     });
 
 
@@ -27,13 +27,11 @@ app.config(function ($routeProvider) {
     	templateUrl: "app/components/search-product/search-product-view.html"
     });
 
-
     $routeProvider
     .when("/update-product", {
-    	templateUrl: "app/components/update-product-price/update-product-price-modal.html"
+    	templateUrl: "app/components/update-product-price/update-product-price-modal.html"       
     });
 
     $routeProvider
     .otherwise({redirectTo: "/"});
 });
-

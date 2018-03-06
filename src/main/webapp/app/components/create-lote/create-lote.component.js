@@ -8,7 +8,7 @@ angular.module("createLote")
       dismiss: '&',
       resolve: '<'
     },
-    controller: function ($scope, toastrm, products) {
+    controller: function createLoteCtrl ($scope, toastrm, products) {
       var $ctrl = this;
 
       $ctrl.$onInit = function() {

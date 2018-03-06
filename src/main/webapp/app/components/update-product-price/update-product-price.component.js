@@ -8,7 +8,7 @@ angular.module("updateProductPrice")
         dismiss: '&',
         resolve: '<'
       },
-      controller: function($scope, products, toastr) {
+      controller: function updateProductPriceCtrl($scope, products, toastr) {
         var $ctrl = this;
 
         $ctrl.$onInit = function() {
