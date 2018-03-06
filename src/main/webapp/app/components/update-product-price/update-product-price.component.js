@@ -8,20 +8,14 @@ angular.module("updateProductPrice")
         dismiss: '&',
         resolve: '<'
       },
-      controller: function($scope, products, toastr) {
+      controller: function updateProductPriceCtrl($scope, products, toastr) {
         var $ctrl = this;
 
         $ctrl.$onInit = function() {
           $ctrl.produto = $ctrl.resolve.produto;
-
           $scope.produto = $ctrl.produto;
 
           $scope.submit = function(product) {
-
-            //adicionar
-
-            console.log(product)
-
             products.updateProductById(product.id, product)
               .then(function success(response) {
 

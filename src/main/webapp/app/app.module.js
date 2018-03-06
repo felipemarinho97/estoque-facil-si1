@@ -1,8 +1,11 @@
-const app = angular.module("efApp", [
+var app = angular.module("efApp", [
   "searchProduct",
   "createProduct",
   "createLote",
   "updateProductPrice",
+  "home",
+  "listProducts",
+  
 
   "ngRoute",
   "ngMessages",
