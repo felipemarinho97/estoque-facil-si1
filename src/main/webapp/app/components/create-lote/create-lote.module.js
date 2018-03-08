@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('createLote', ['ui.bootstrap', 'products']);
+angular.module('createLote', ['ui.bootstrap']);

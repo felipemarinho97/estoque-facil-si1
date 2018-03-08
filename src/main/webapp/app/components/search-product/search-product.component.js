@@ -3,12 +3,18 @@
 angular.module("searchProduct").
   component("searchProduct", {
     templateUrl: "app/components/search-product/search-product-view.html",
-    controller: function searchProductCtrl ($scope, $uibModal, toastr, products) {
-        var $ctrl = this;        
+    controller: function ($scope, $uibModal, $http, toastr, $location, products) {
+        var $ctrl = this;
+        var urlServer = "http://localhost:8080/api/";
+        // $scope.title = "Search Product";
         $scope.productsList = [];
         $scope.produtos = [];
 
-        var loadProductsList = function () {    
+        var loadProductsList = function () {
+            // $http.get("http://localhost:8080/api/")
+            //     .then(function successCallback(response) {
+            //         $scope.productsList = response.data;
+            //     });
 
             products.getAllProducts()
                 .then(function successCallback(response) {
@@ -34,6 +40,14 @@ angular.module("searchProduct").
         };
 
         $scope.openAtribuirPrecoParaProdutoDialog = function(product) {
+
+            // var modalInstance = $uibModal.open({
+            //     ariaLabelledBy: 'Adicionar Produto',
+            //     ariaDescribedBy: 'Formulario para adição de um novo produto',
+            //     templateUrl: 'core/main/create-product.html',
+            //     controller: 'CreateProductCtrl'
+            // });
+
             var modalInstance = $uibModal.open({
                 ariaLabelledBy: 'Atribuir preço á Produto',
                 ariaDescribedBy: 'Formulario para Atribuir preço á Produto',
@@ -53,7 +67,9 @@ angular.module("searchProduct").
             });
         };
 
-        $scope.pesquisarProdutoPorId = function(id) {            
+        $scope.pesquisarProdutoPorId = function(id) {
+            // implementar
+            console.log(id)
             products.findProductById(id)
                 .then(function successCallback(response) {
                     $scope.productsList = [
@@ -91,7 +107,17 @@ angular.module("searchProduct").
                     loadProductsList();
                 }
             });
-        };   
-        loadProductsList();   
+        };
+
+        // $scope.createLot = function(produto) {
+        //     console.log(produto)
+        // };
+        //
+        // $scope.atribuirPrice = function(product) {
+        //     console.log(product)
+        // };
+
+        loadProductsList();
+        loadProductsList();
     }
   });

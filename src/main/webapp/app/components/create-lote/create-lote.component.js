@@ -8,7 +8,7 @@ angular.module("createLote")
       dismiss: '&',
       resolve: '<'
     },
-    controller: function createLoteCtrl ($scope, toastrm, products) {
+    controller: function ($scope, $http, toastr) {
       var $ctrl = this;
 
       $ctrl.$onInit = function() {
@@ -30,12 +30,13 @@ angular.module("createLote")
 
         $scope.submit = function (dataDeValidade, numeroDeItens) {
 
+            //adicionar
             var lote = {
                 dataDeValidade: dataDeValidade.getDay() + "/" + (dataDeValidade.getMonth() + 1) + dataDeValidade.getFullYear(),
                 numeroDeItens: numeroDeItens
             }
 
-            products.createLote($ctrl.produto.id, lote)
+            $http.post("http://localhost:8080/api/produto/" + $ctrl.produto.id + "/lote", JSON.stringify(lote))
                 .then(function success(response) {
                     console.log(response)
                     if (response.status === 201) {
@@ -60,4 +61,5 @@ angular.module("createLote")
         }
       }
     }
+
 });
