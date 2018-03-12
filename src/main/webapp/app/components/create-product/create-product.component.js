@@ -8,7 +8,7 @@ angular.module("createProduct")
       dismiss: '&',
       resolve: '<'
     },
-    controller: function ($scope, $http, toastr) {
+    controller: function ($scope, $http, toastr, products) {
 
         var $ctrl = this;
 
@@ -25,18 +25,7 @@ angular.module("createProduct")
         ];
 
         $scope.createProduct = function (product) {
-
-            // if (situacao) {
-            //     if (situacao === 1) {
-            //         product.situacao = 1
-            //     } else {
-            //         product.situacao = 2
-            //     }
-            // }
-
-            // product.situacao = situacao === 1 ? 1 : 2;
-
-            $http.post("http://localhost:8080/api/produto/", JSON.stringify(product))
+        	 products.createProduct(product)
                 .then(function success(response) {
                     if (response.status === 201) {
                         toastr.success("Produto adicionado com sucesso!");
