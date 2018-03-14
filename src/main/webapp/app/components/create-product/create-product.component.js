@@ -8,12 +8,10 @@ angular.module("createProduct")
       dismiss: '&',
       resolve: '<'
     },
-    controller: function ($scope, $http, toastr, products) {
-
+    controller: function ($scope, toastr, products) {
+      
         var $ctrl = this;
-
         $ctrl.product = {};
-
         $ctrl.listaDeSituacoes = [
             {
                 nome: "Disponivel",
@@ -25,7 +23,10 @@ angular.module("createProduct")
         ];
 
         $scope.createProduct = function (product) {
-        	 products.createProduct(product)
+
+           product.situacao = situacao === 1 ? 1 : 2;
+
+            products.createProduct(product)
                 .then(function success(response) {
                     if (response.status === 201) {
                         toastr.success("Produto adicionado com sucesso!");
