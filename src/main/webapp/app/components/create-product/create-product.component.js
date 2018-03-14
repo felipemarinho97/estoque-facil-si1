@@ -23,9 +23,6 @@ angular.module("createProduct")
         ];
 
         $scope.createProduct = function (product) {
-
-           product.situacao = situacao === 1 ? 1 : 2;
-
             products.createProduct(product)
                 .then(function success(response) {
                     if (response.status === 201) {

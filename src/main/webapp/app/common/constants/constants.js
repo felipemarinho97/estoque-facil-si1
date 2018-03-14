@@ -1,2 +1,2 @@
 app
-    .constant('BASE_SERVER_URL', "https://estoque-facil-si.herokuapp.com/api");
+    .constant('BASE_SERVER_URL', "http://localhost:8080/api");
