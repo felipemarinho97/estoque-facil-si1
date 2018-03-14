@@ -39,6 +39,27 @@ angular.module("searchProduct").
             });
         };
 
+
+        $scope.openAtribuirDescontoParaCategoriaDialog = function(product){
+            var modalInstance = $uibModal.open({
+                ariaLabelledBy: 'Atribuir desconto à categoria',
+                ariaDescribedBy: 'Formulario para Atribuir desconto à categoria',
+                component: 'updateDesconto',
+                resolve: {
+                    produto: function () {
+                        return angular.copy(product);
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (result) {
+                console.log(result)
+                if (result.status === 201) {
+                    loadProductsList();
+                }
+            });
+        };
+
         $scope.openAtribuirPrecoParaProdutoDialog = function(product) {
 
             // var modalInstance = $uibModal.open({
