@@ -3,7 +3,7 @@ app.config(function ($routeProvider) {
       template: "<search-product></search-product>"
     }).when("/login",{
       	template: "<login></login>"
-    });    
+    });
 
     $routeProvider.otherwise({
         redirectTo: '/'

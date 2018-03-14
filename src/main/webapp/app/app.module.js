@@ -6,6 +6,7 @@ const app = angular.module("efApp", [
   "updateDesconto",
   "navbar",
   "header",
+  "login",
 
   "ngRoute",
   "ngMessages",
