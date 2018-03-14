@@ -1,6 +1,6 @@
 app.config(function ($routeProvider) {
-    $routeProvider.when("/login",{
-      	templateUrl: "<login></login>"
+    $routeProvider.when("/",{
+      	template: "<search-product></search-product>"
     });    
 
     $routeProvider.otherwise({
