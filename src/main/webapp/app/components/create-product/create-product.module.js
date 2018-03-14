@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('createProduct', []);
+angular.module('createProduct', ['products']);

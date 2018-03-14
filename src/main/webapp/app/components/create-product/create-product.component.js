@@ -9,7 +9,7 @@ angular.module("createProduct")
       resolve: '<'
     },
     controller: function ($scope, toastr, products) {
-
+      
         var $ctrl = this;
         $ctrl.product = {};
         $ctrl.listaDeSituacoes = [

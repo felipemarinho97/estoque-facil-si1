@@ -8,6 +8,7 @@ angular.module("createLote")
       dismiss: '&',
       resolve: '<'
     },
+
     controller: function ($scope,toastr, products) {
       var $ctrl = this;
 
@@ -34,9 +35,8 @@ angular.module("createLote")
                 dataDeValidade: dataDeValidade.getDay() + "/" + (dataDeValidade.getMonth() + 1) + dataDeValidade.getFullYear(),
                 numeroDeItens: numeroDeItens
             }
-
             
-                products.createLote($ctrl.produto, lote)
+                products.createLote($ctrl.produto.id, lote)
                 .then(function success(response) {
                     console.log(response)
                     if (response.status === 201) {
