@@ -17,7 +17,7 @@ angular.module("updateDesconto")
         $ctrl.productsList = [];
         $ctrl.productsList = [];
 
-        var loadProductsList = function () {
+        $ctrl.loadProductsList = function () {
             products.getAllProducts()
                 .then(function successCallback(response) {
                     $ctrl.productsList = response.data;
@@ -26,23 +26,21 @@ angular.module("updateDesconto")
                 });
         };
 
-        // $scope.atribuiDesconto = function (desc){
-        //     $ctrl.desconto = desc;
-        // };
-
         $scope.submit = function (desc) {
+        	$ctrl.loadProductsList;
+        	
             $ctrl.desconto = desc;
             var i;
             var len = $ctrl.productsList.length;
             $ctrl.desconto *= 0.01;
+            console.log($ctrl.productsList);
+            
             for (i = 0; i< len; i++){
+            	
                 if ($ctrl.productsList[i].categoria == $scope.produto.categoria){
-                    if ($ctrl.productsList[i].realPreco === undefined){
-                        $ctrl.productsList[i].realPreco = $ctrl.productsList[i].preco; 
-                        $ctrl.productsList[i].preco = $ctrl.productsList[i].realPreco * $ctrl.desconto;           
-                    } else {
-                        $ctrl.productsList[i].preco = $ctrl.productsList[i].realPreco * $ctrl.desconto;
-                    }
+                    
+                    $ctrl.productsList[i].preco = $ctrl.productsList[i].realPreco * $ctrl.desconto;
+                    
                     console.log("real preço: ");
                     console.log($ctrl.productsList[i].realPreco);
                     products.updateProductById($ctrl.productsList[i].id, $ctrl.productsList[i])
@@ -57,14 +55,18 @@ angular.module("updateDesconto")
             $ctrl.close({$value: {
                 status: 201
             }});
+            $ctrl.loadProductsList();
+            $ctrl.loadProductsList();
+                
         };
 
         $scope.cancel = function () {
             $ctrl.dismiss({$value: 'cancel'});
+            $ctrl.loadProductsList();
         };
 
-        loadProductsList();
-        loadProductsList();
+        $ctrl.loadProductsList();
+        $ctrl.loadProductsList();
 
       }
     }

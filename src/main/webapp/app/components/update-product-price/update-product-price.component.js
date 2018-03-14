@@ -18,18 +18,19 @@ angular.module("updateProductPrice")
 
           $scope.submit = function(product) {
 
-            //adicionar
-
-            console.log(product)
-
-            products.updateProductById(product.id, product)
+        	product.realPreco = product.preco;
+          	
+      		products.updateProductById(product.id, product)
               .then(function success(response) {
 
                 if (response.status === 200) {
                   toastr.success("Produto editado com sucesso!");
+                  console.log("Produto Editado: ");
+                  console.log(response.data);
                   $ctrl.close({$value: {
                     status: 200,
                     newProduct: response.data
+              
                   }});
                 }
               }, function error(error) {
@@ -37,6 +38,8 @@ angular.module("updateProductPrice")
                 toastr.error("Problemas ao tentar atribuir preço ao produto: " + product.id);
               });
 
+        	 
+            
           };
 
           $scope.cancel = function() {

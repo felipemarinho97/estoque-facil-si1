@@ -6,16 +6,10 @@ angular.module("searchProduct").
     controller: function ($scope, $uibModal, $http, toastr, $location, products) {
         var $ctrl = this;
         var urlServer = "http://localhost:8080/api/";
-        // $scope.title = "Search Product";
         $scope.productsList = [];
         $scope.produtos = [];
 
         var loadProductsList = function () {
-            // $http.get("http://localhost:8080/api/")
-            //     .then(function successCallback(response) {
-            //         $scope.productsList = response.data;
-            //     });
-
             products.getAllProducts()
                 .then(function successCallback(response) {
                     $scope.productsList = response.data;
@@ -55,9 +49,11 @@ angular.module("searchProduct").
             modalInstance.result.then(function (result) {
                 console.log(result)
                 if (result.status === 201) {
+                	console.log("carregou listas");
                     loadProductsList();
                 }
             });
+            loadProductsList();
         };
 
         $scope.openAtribuirPrecoParaProdutoDialog = function(product) {
