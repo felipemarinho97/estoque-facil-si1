@@ -4,6 +4,8 @@ const app = angular.module("efApp", [
   "createLote",
   "updateProductPrice",
   "updateDesconto",
+  "navbar",
+  "header",
 
   "ngRoute",
   "ngMessages",

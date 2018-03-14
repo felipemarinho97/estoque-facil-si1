@@ -3,9 +3,8 @@
 angular.module("searchProduct").
   component("searchProduct", {
     templateUrl: "app/components/search-product/search-product-view.html",
-    controller: function ($scope, $uibModal, $http, toastr, $location, products) {
+    controller: function ($scope, $uibModal, toastr, $location, products) {
         var $ctrl = this;
-        var urlServer = "http://localhost:8080/api/";
         $scope.productsList = [];
         $scope.produtos = [];
 
@@ -33,7 +32,6 @@ angular.module("searchProduct").
             });
         };
 
-
         $scope.openAtribuirDescontoParaCategoriaDialog = function(product){
             var modalInstance = $uibModal.open({
                 ariaLabelledBy: 'Atribuir desconto à categoria',
@@ -56,14 +54,7 @@ angular.module("searchProduct").
             loadProductsList();
         };
 
-        $scope.openAtribuirPrecoParaProdutoDialog = function(product) {
-
-            // var modalInstance = $uibModal.open({
-            //     ariaLabelledBy: 'Adicionar Produto',
-            //     ariaDescribedBy: 'Formulario para adição de um novo produto',
-            //     templateUrl: 'core/main/create-product.html',
-            //     controller: 'CreateProductCtrl'
-            // });
+        $scope.openAtribuirPrecoParaProdutoDialog = function(product) {          
 
             var modalInstance = $uibModal.open({
                 ariaLabelledBy: 'Atribuir preço á Produto',
@@ -84,9 +75,8 @@ angular.module("searchProduct").
             });
         };
 
-        $scope.pesquisarProdutoPorId = function(id) {
-            // implementar
-            console.log(id)
+        $scope.pesquisarProdutoPorId = function(id) {        
+           
             products.findProductById(id)
                 .then(function successCallback(response) {
                     $scope.productsList = [
@@ -124,17 +114,8 @@ angular.module("searchProduct").
                     loadProductsList();
                 }
             });
-        };
+        };     
 
-        // $scope.createLot = function(produto) {
-        //     console.log(produto)
-        // };
-        //
-        // $scope.atribuirPrice = function(product) {
-        //     console.log(product)
-        // };
-
-        loadProductsList();
         loadProductsList();
     }
   });

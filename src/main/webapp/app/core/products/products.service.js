@@ -8,7 +8,9 @@ productService.factory("products", function ($http, BASE_SERVER_URL) {
         getAllProducts: _getAllProducts,
         updateProductById: _updateProductById,
         updateAllProducts: _updateAllProducts,
-        findProductById: _findProductById
+	      findProductById: _findProductById,
+	      createProduct: _createProduct,  
+	      createLote : _createLote
     };
 
     function _getAllProducts() {
@@ -19,12 +21,20 @@ productService.factory("products", function ($http, BASE_SERVER_URL) {
         return $http.post(BASE_SERVER_URL + "/produto/");
     }
 
-    function _updateProductById(id, data) {
-        return $http.put(BASE_SERVER_URL + "/produto/" + id, data);
+    function _updateProductById(id, product) {
+        return $http.put(BASE_SERVER_URL + "/produto/" + id, product);
     }
 
     function _findProductById(id) {
         return $http.get(BASE_SERVER_URL + "/produto/" + id);
+    }
+    
+	  function _createProduct(product) {
+        return $http.post(BASE_SERVER_URL + "/produto/", product);
+    }
+
+    function _createLote(id, lote ) {
+        return $http.post(BASE_SERVER_URL + "/produto/" + id + "/lote", lote);
     }
 
 });
