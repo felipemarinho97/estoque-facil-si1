@@ -3,9 +3,15 @@
 angular.module('login')
   .component('login', {
     templateUrl: "app/components/login/login.html",
-    controller: ($scope) => {
+    controller: ($scope, products) => {
 
-      $scope.user;
+      $scope.login = () => {
+        if ($scope.user == 'admin') {
+          products.setAdmin(true);
+        } else {
+          products.setAdmin(false);
+        }
+      }
       $scope.pass;
 
 

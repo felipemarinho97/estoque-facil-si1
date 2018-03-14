@@ -66,11 +66,12 @@
                 <li role="menuitem"><a ng-click="openAtribuirPrecoParaProdutoDialog(product)">Atribuir preço</a></li>
                 <li role="menuitem"><a ng-click="openCriarLoteDialog(product)">Criar lote</a></li>
                 <li role="menuitem"><a ng-click="openAtribuirDescontoParaCategoriaDialog(product)">Atribuir desconto</a></li>
+                <li ng-if="!isAdmin()" role="menuitem"><a ng-click="comprar(product)">Comprar</a></li>
               </ul>
             </div>
-          </div>          
-        </div>        
+          </div>
+        </div>
       </div>
-    </div>    
+    </div>
   </div>
 </div>
