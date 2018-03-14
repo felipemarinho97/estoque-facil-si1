@@ -5,6 +5,8 @@ angular.module("searchProduct").
     templateUrl: "app/components/search-product/search-product-view.html",
     controller: function ($scope, $uibModal, toastr, $location, products) {
         var $ctrl = this;
+        var urlServer = "https://estoque-facil-si.herokuapp.com/api/";
+        // $scope.title = "Search Product";
         $scope.productsList = [];
         $scope.produtos = [];
 

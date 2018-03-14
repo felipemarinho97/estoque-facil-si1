@@ -35,7 +35,6 @@ angular.module("createLote")
                 dataDeValidade: dataDeValidade.getDay() + "/" + (dataDeValidade.getMonth() + 1) + dataDeValidade.getFullYear(),
                 numeroDeItens: numeroDeItens
             }
-            
                 products.createLote($ctrl.produto.id, lote)
                 .then(function success(response) {
                     console.log(response)
