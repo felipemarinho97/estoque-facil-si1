@@ -15,7 +15,6 @@ angular.module("updateDesconto")
         $ctrl.produto = $ctrl.resolve.produto;
         $scope.produto = $ctrl.produto;
         $ctrl.productsList = [];
-        $ctrl.productsList = [];
 
         $ctrl.loadProductsList = function () {
             products.getAllProducts()
@@ -36,16 +35,12 @@ angular.module("updateDesconto")
             console.log($ctrl.productsList);
             
             for (i = 0; i< len; i++){
-            	
                 if ($ctrl.productsList[i].categoria == $scope.produto.categoria){
-                    
                     $ctrl.productsList[i].preco = $ctrl.productsList[i].realPreco * $ctrl.desconto;
                     
-                    console.log("real preço: ");
-                    console.log($ctrl.productsList[i].realPreco);
                     products.updateProductById($ctrl.productsList[i].id, $ctrl.productsList[i])
                       .then(function success(response) {
-                        console.log(i);
+                        console.log(response.data);
                       }, function error(error) {
                         console.log(error);
                       });
@@ -55,7 +50,6 @@ angular.module("updateDesconto")
             $ctrl.close({$value: {
                 status: 201
             }});
-            $ctrl.loadProductsList();
             $ctrl.loadProductsList();
                 
         };

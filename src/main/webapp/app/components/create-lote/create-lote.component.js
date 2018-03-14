@@ -39,7 +39,6 @@ angular.module("createLote")
                 .then(function success(response) {
                     console.log(response)
                     if (response.status === 201) {
-                        console.log("Lote criado com sucesso!");
                         toastr.success("Lote criado com sucesso!");
                         $ctrl.close({$value: {
                             status: 201

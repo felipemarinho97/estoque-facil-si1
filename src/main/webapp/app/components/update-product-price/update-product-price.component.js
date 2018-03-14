@@ -24,8 +24,6 @@ angular.module("updateProductPrice")
 
                 if (response.status === 200) {
                   toastr.success("Produto editado com sucesso!");
-                  console.log("Produto Editado: ");
-                  console.log(response.data);
                   $ctrl.close({$value: {
                     status: 200,
                     newProduct: response.data
