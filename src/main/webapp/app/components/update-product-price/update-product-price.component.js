@@ -10,17 +10,11 @@ angular.module("updateProductPrice")
       },
       controller: function($scope, products, toastr) {
         var $ctrl = this;
-
         $ctrl.$onInit = function() {
           $ctrl.produto = $ctrl.resolve.produto;
-
           $scope.produto = $ctrl.produto;
 
-          $scope.submit = function(product) {
-
-            //adicionar
-
-            console.log(product)
+          $scope.submit = function(product) {             
 
             products.updateProductById(product.id, product)
               .then(function success(response) {
@@ -36,7 +30,6 @@ angular.module("updateProductPrice")
                 console.log(error);
                 toastr.error("Problemas ao tentar atribuir preço ao produto: " + product.id);
               });
-
           };
 
           $scope.cancel = function() {
@@ -47,5 +40,4 @@ angular.module("updateProductPrice")
         };
       }
     }
-
   );

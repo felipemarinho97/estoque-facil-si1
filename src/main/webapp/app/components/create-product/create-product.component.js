@@ -8,12 +8,10 @@ angular.module("createProduct")
       dismiss: '&',
       resolve: '<'
     },
-    controller: function ($scope, $http, toastr) {
-
+    controller: function ($scope, toastr, products) {
+      
         var $ctrl = this;
-
         $ctrl.product = {};
-
         $ctrl.listaDeSituacoes = [
             {
                 nome: "Disponivel",
@@ -26,17 +24,9 @@ angular.module("createProduct")
 
         $scope.createProduct = function (product) {
 
-            // if (situacao) {
-            //     if (situacao === 1) {
-            //         product.situacao = 1
-            //     } else {
-            //         product.situacao = 2
-            //     }
-            // }
+           product.situacao = situacao === 1 ? 1 : 2;
 
-            // product.situacao = situacao === 1 ? 1 : 2;
-
-            $http.post("https://estoque-facil-si.herokuapp.com/api/produto/", JSON.stringify(product))
+            products.createProduct(product)
                 .then(function success(response) {
                     if (response.status === 201) {
                         toastr.success("Produto adicionado com sucesso!");
