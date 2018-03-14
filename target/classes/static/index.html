@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="efApp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Estoque Facil</title>
+  <meta name="description" content="Estoque Fácil - SI1 2017.2">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/animate.css">
+  <link rel="stylesheet" type="text/css" href="bower_components/angular-toastr/dist/angular-toastr.css" />
+</head>
+<body>
+  <navbar></navbar>
+
+  <!-- Page Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <p class="lead">Estoque Facil</p>
+        <div class="list-group">
+          <a href="#!/produtos" class="list-group-menu list-group-item active" id="products-menu-item">
+            Produtos
+          </a>
+          <a href="#!/vendas" class="list-group-menu list-group-item" id="sales-menu-item">
+            Vendas
+          </a>
+        </div>
+      </div>    
+
+      <div class="col-md-9">
+          <div ng-view=""></div>
+      </div>
+
+    </div>
+  </div>  
+
+  <div class="container">
+    <hr>    
+    <div class="container">
+      </br>
+      <p class="text-muted text-center">&copy; 2018 Estoque Facil</p>
+    </div>
+  </div>
+
+  <!-- Bower scripts: -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="bower_components/angular-messages/angular-messages.js"></script>
+  <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
+  <!-- Application scripts: -->
+  <script src="app/app.module.js"></script>
+  <script src="app/app.routes.js"></script>  
+  <script src="app/components/update-product-price/update-product-price.module.js"></script>
+  <script src="app/components/update-product-price/update-product-price.component.js"></script>
+  <script src="app/components/create-lote/create-lote.module.js"></script>
+  <script src="app/components/create-lote/create-lote.component.js"></script>
+  <script src="app/components/create-product/create-product.module.js"></script>
+  <script src="app/components/create-product/create-product.component.js"></script>
+  <script src="app/components/search-product/search-product.module.js"></script>
+  <script src="app/components/search-product/search-product.component.js"></script>
+  <script src="app/components/navbar/navbar.module.js"></script>
+  <script src="app/components/navbar/navbar.component.js"></script>
+  <script src="app/core/products/products.module.js"></script>
+  <script src="app/core/products/products.service.js"></script>
+  <script src="app/common/constants/constants.js"></script>
+</body>
+</html>
