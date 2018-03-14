@@ -13,7 +13,7 @@
       <br>
 
       <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-10">
           <div class="input-group c-search">
             <input type="text" class="form-control" ng-model="productId" id="product-list-search">
             <span class="input-group-btn">
@@ -23,11 +23,20 @@
             </span>
           </div>
         </div>
+        <div class="col-xs-2">
+           <div class="h6">Ordenar por</div>
+           <select class="select" ng-model="orderByAttr">
+              <option ng-value="'nome'" selected="selected">Nome</option>
+              <option ng-value="'preco'">Preço</option>
+              <option ng-value="'preco'">Data</option>
+              <option ng-value="'categoria'">Categoria</option>
+           </select>
+        </div>
       </div>
     </div>
 
     <div class="flex-row row">
-      <div class="col-xs-6 col-sm-5 col-lg-4" ng-repeat="product in productsList">
+      <div class="col-xs-6 col-sm-5 col-lg-4" ng-repeat="product in productsList | filter:productId | orderBy: orderByAttr">
         <div class="thumbnail">
           <div class="caption">
             <h4 id="product-name">
