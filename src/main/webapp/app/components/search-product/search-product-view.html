@@ -44,10 +44,10 @@
             </h4>
             <h5 id="product-price">
               <div ng-if="!product.preco">
-                R$ 0,00
+                <div ng-if="isAdmin()">R$ 0,00</div>
               </div>
               <div ng-if="product.preco">
-                R$ {{product.preco}}
+                <div ng-if="isAdmin() || product.situacao === true">R$ {{product.preco}}</div>
               </div>
             </h5>
             <h5 id="product-situation">
