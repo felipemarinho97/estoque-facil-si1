@@ -5,7 +5,7 @@
         <span class="title">Produtos</span>
         <ul class="pull-right c-controls">
           <li>
-            <a class="btn btn-success" ng-click="openCreateProductDialog()">Adicionar Produto</a>
+            <a class="btn btn-success" ng-if="isAdmin()" ng-click="openCreateProductDialog()">Adicionar Produto</a>
           </li>
         </ul>
       </div>
@@ -58,7 +58,10 @@
                 Em falta
               </div>
             </h5>
-            <div class="btn-group" uib-dropdown>
+            <div ng-if="product.situacao === true">
+                <a class="btn btn-success" ng-if="!isAdmin()" ng-click="comprar(product)">Comprar</a>
+            </div>
+            <div ng-if="isAdmin()" class="btn-group" uib-dropdown>
               <button id="single-button" type="button" class="btn btn-default pull-right" uib-dropdown-toggle>
                 <span class="glyphicon glyphicon-cog"></span><span class="caret"></span>
               </button>
@@ -66,7 +69,6 @@
                 <li role="menuitem"><a ng-click="openAtribuirPrecoParaProdutoDialog(product)">Atribuir preço</a></li>
                 <li role="menuitem"><a ng-click="openCriarLoteDialog(product)">Criar lote</a></li>
                 <li role="menuitem"><a ng-click="openAtribuirDescontoParaCategoriaDialog(product)">Atribuir desconto</a></li>
-                <li ng-if="!isAdmin()" role="menuitem"><a ng-click="comprar(product)">Comprar</a></li>
               </ul>
             </div>
           </div>

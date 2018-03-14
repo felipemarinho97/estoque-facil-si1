@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('navbar', []);
+angular.module('navbar', ['products']);

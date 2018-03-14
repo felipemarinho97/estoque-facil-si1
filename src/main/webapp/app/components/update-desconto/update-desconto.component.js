@@ -8,7 +8,7 @@ angular.module("updateDesconto")
       dismiss: '&',
       resolve: '<'
     },
-    controller: function ($scope, $http, toastr, products) {
+    controller: function ($scope, $http, $location, toastr, products) {
       var $ctrl = this;
 
       $ctrl.$onInit = function() {
@@ -28,21 +28,18 @@ angular.module("updateDesconto")
 
         $scope.submit = function (desc) {
         	$ctrl.loadProductsList;
-        	
+
             $ctrl.desconto = desc;
             var i;
             var len = $ctrl.productsList.length;
             $ctrl.desconto *= 0.01;
-            console.log($ctrl.productsList);
-            
+
             for (i = 0; i< len; i++){
-            	
+
                 if ($ctrl.productsList[i].categoria == $scope.produto.categoria){
-                    
+
                     $ctrl.productsList[i].preco = $ctrl.productsList[i].realPreco * $ctrl.desconto;
-                    
-                    console.log("real preço: ");
-                    console.log($ctrl.productsList[i].realPreco);
+
                     products.updateProductById($ctrl.productsList[i].id, $ctrl.productsList[i])
                       .then(function success(response) {
                         console.log(i);
@@ -57,12 +54,25 @@ angular.module("updateDesconto")
             }});
             $ctrl.loadProductsList();
             $ctrl.loadProductsList();
-                
+
+            toastr.success("Desconto de " + (100-desc) + "% aplicado com sucesso!");
+            $scope.changeRoute("#/produtos")
+
         };
 
         $scope.cancel = function () {
             $ctrl.dismiss({$value: 'cancel'});
             $ctrl.loadProductsList();
+        };
+
+        $scope.changeRoute = function(url, forceReload) {
+            $scope = $scope || angular.element(document).scope();
+            if(forceReload || $scope.$$phase) {
+                window.location = url;
+            } else {
+                $location.path(url);
+                $scope.$apply();
+            }
         };
 
         $ctrl.loadProductsList();

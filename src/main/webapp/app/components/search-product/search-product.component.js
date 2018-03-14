@@ -51,7 +51,6 @@ angular.module("searchProduct").
             modalInstance.result.then(function (result) {
                 console.log(result)
                 if (result.status === 201) {
-                	console.log("carregou listas");
                     loadProductsList();
                 }
             });
@@ -119,6 +118,10 @@ angular.module("searchProduct").
                 }
             });
         };
+
+        $scope.comprar = () => {
+            toastr.success("Produto comprado com sucesso!");
+        }
 
         loadProductsList();
     }

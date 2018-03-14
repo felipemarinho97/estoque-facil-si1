@@ -5,6 +5,7 @@ const app = angular.module("efApp", [
   "updateProductPrice",
   "updateDesconto",
   "navbar",
+  "sidebar",
   "header",
   "login",
 
