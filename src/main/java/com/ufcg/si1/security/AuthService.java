@@ -7,7 +7,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.ufcg.si1.model.User;
 import com.ufcg.si1.repository.UserRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AuthService implements UserDetailsService {
 	@Autowired
 	public UserRepository userRepository;
@@ -19,7 +21,7 @@ public class AuthService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException(username);
         }
-        
+
 		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), user.getAuthorities());
 }
 }

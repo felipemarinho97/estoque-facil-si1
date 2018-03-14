@@ -7,6 +7,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import java.util.*;
+import com.ufcg.si1.model.*;
+import com.ufcg.si1.repository.*;
 
 @Configuration
 @EnableWebSecurity
@@ -14,24 +17,43 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
     @Autowired
     private AuthService authService;
-
-    @Autowired
-    private BCryptPasswordEncoder bCrypt;
     
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-			.antMatchers(HttpMethod.POST, "/register").permitAll()
-			.antMatchers(HttpMethod.OPTIONS, "/register").permitAll()
-			.antMatchers(HttpMethod.OPTIONS).permitAll()
-			.anyRequest().authenticated()
-			.and()
-			.csrf().disable()
-			.httpBasic();
+		http.cors().and().csrf().disable().authorizeRequests()
+			.antMatchers("/admin/**").hasAnyRole("ADMIN").and()
+			.authorizeRequests()
+            .anyRequest().permitAll()
+			.and().httpBasic();
 	}
 	
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(authService).passwordEncoder(bCrypt);
+	// @Override
+	// protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+	// 	auth.userDetailsService(authService);
+	// 	createAdmin();
+	// }
+
+	// @Autowired
+	// private UserRepository userRepository;
+	// @Autowired
+	// private RoleRepository roleRepository;
+	// private BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+
+	// private void createAdmin() {
+	// 	Role role = new Role();
+	// 	role.setAuthority("ADMIN");
+	// 	roleRepository.save(role);
+	// 	List<Role> roles = new ArrayList();
+	// 	roles.add(role);
+	// 	User user = new User();
+	// 	user.setEmail("admin");
+	// 	user.setPassword("admin");
+	// 	user.setRoles(roles);
+	// 	userRepository.save(user);
+	// }
+
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		  auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
 	}
 }
