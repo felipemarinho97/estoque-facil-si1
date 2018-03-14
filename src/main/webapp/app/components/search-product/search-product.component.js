@@ -5,8 +5,6 @@ angular.module("searchProduct").
     templateUrl: "app/components/search-product/search-product-view.html",
     controller: function ($scope, $uibModal, toastr, $location, products) {
         var $ctrl = this;
-        var urlServer = "https://estoque-facil-si.herokuapp.com/api/";
-        // $scope.title = "Search Product";
         $scope.productsList = [];
         $scope.produtos = [];
 
@@ -32,6 +30,28 @@ angular.module("searchProduct").
                   loadProductsList();
                 }
             });
+        };
+
+        $scope.openAtribuirDescontoParaCategoriaDialog = function(product){
+            var modalInstance = $uibModal.open({
+                ariaLabelledBy: 'Atribuir desconto à categoria',
+                ariaDescribedBy: 'Formulario para Atribuir desconto à categoria',
+                component: 'updateDesconto',
+                resolve: {
+                    produto: function () {
+                        return angular.copy(product);
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (result) {
+                console.log(result)
+                if (result.status === 201) {
+                	console.log("carregou listas");
+                    loadProductsList();
+                }
+            });
+            loadProductsList();
         };
 
         $scope.openAtribuirPrecoParaProdutoDialog = function(product) {          

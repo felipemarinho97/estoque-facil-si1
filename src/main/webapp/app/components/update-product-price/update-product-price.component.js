@@ -14,16 +14,22 @@ angular.module("updateProductPrice")
           $ctrl.produto = $ctrl.resolve.produto;
           $scope.produto = $ctrl.produto;
 
-          $scope.submit = function(product) {             
 
-            products.updateProductById(product.id, product)
+         $scope.submit = function(product) {
+
+        	product.realPreco = product.preco;
+          	
+      		products.updateProductById(product.id, product)
               .then(function success(response) {
 
                 if (response.status === 200) {
                   toastr.success("Produto editado com sucesso!");
+                  console.log("Produto Editado: ");
+                  console.log(response.data);
                   $ctrl.close({$value: {
                     status: 200,
                     newProduct: response.data
+              
                   }});
                 }
               }, function error(error) {

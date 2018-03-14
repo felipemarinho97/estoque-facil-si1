@@ -25,6 +25,9 @@ public class Produto {
 
 	@Column
     private BigDecimal preco;
+	
+	@Column
+    private BigDecimal realPreco;
 
 	@Column
     @NotEmpty
@@ -48,6 +51,7 @@ public class Produto {
 	public Produto() {
 		this.id = 0;
 		this.preco = new BigDecimal(0);
+		this.realPreco = this.preco;
 	}
 
 	public Produto(long id, String nome, String codigoBarra, String fabricante,
@@ -55,6 +59,7 @@ public class Produto {
 		this.id = id;
 		this.nome = nome;
 		this.preco = new BigDecimal(0);
+		this.realPreco = this.preco;
 		this.codigoBarra = codigoBarra;
 		this.fabricante = fabricante;
 		this.categoria = nomeCategoria;
@@ -75,6 +80,14 @@ public class Produto {
 
 	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
+	}
+	
+	public BigDecimal getRealPreco() {
+		return realPreco;
+	}
+
+	public void setRealPreco(BigDecimal realPreco) {
+		this.realPreco = realPreco;
 	}
 
 	public long getId() {

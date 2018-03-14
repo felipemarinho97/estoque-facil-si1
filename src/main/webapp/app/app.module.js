@@ -3,6 +3,7 @@ const app = angular.module("efApp", [
   "createProduct",
   "createLote",
   "updateProductPrice",
+  "updateDesconto",
   "navbar",
   "header",
 

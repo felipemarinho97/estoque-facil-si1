@@ -80,6 +80,7 @@ public class ProdutoController {
 
 		currentProduto.setNome(produto.getNome());
 		currentProduto.setPreco(produto.getPreco());
+		currentProduto.setRealPreco(produto.getRealPreco());
 		currentProduto.setCodigoBarra(produto.getCodigoBarra());
 		currentProduto.setFabricante(produto.getFabricante());
 		currentProduto.setCategoria(produto.getCategoria());
