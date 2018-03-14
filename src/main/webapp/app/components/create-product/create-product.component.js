@@ -15,10 +15,10 @@ angular.module("createProduct")
         $ctrl.listaDeSituacoes = [
             {
                 nome: "Disponivel",
-                valor: 1
+                valor: true
             }, {
                 nome: "Em Falta",
-                valor: 2
+                valor: false
             }
         ];
 
