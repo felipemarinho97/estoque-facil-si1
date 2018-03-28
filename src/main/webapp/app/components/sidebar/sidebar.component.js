@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('navbar')
-  .component('navbar', {
-    templateUrl: "app/components/navbar/navbar.html",
+angular.module('sidebar')
+  .component('sidebar', {
+    templateUrl: "app/components/sidebar/sidebar.html",
     controller: ($scope, products) => {
       // do something
       $scope.srv = products;

@@ -8,6 +8,10 @@ angular.module("searchProduct").
         $scope.productsList = [];
         $scope.produtos = [];
 
+        $scope.isAdmin = () => {
+          return products.isAdmin();
+        }
+
         var loadProductsList = function () {
             products.getAllProducts()
                 .then(function successCallback(response) {
@@ -47,14 +51,13 @@ angular.module("searchProduct").
             modalInstance.result.then(function (result) {
                 console.log(result)
                 if (result.status === 201) {
-                	console.log("carregou listas");
                     loadProductsList();
                 }
             });
             loadProductsList();
         };
 
-        $scope.openAtribuirPrecoParaProdutoDialog = function(product) {          
+        $scope.openAtribuirPrecoParaProdutoDialog = function(product) {
 
             var modalInstance = $uibModal.open({
                 ariaLabelledBy: 'Atribuir preço á Produto',
@@ -75,8 +78,8 @@ angular.module("searchProduct").
             });
         };
 
-        $scope.pesquisarProdutoPorId = function(id) {        
-           
+        $scope.pesquisarProdutoPorId = function(id) {
+
             products.findProductById(id)
                 .then(function successCallback(response) {
                     $scope.productsList = [
@@ -114,7 +117,11 @@ angular.module("searchProduct").
                     loadProductsList();
                 }
             });
-        };     
+        };
+
+        $scope.comprar = () => {
+            toastr.success("Produto comprado com sucesso!");
+        }
 
         loadProductsList();
     }

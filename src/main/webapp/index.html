@@ -20,17 +20,8 @@
   <!-- Page Content -->
   <div class="container">
     <div class="row">
-      <div class="col-md-3">
-        <p class="lead">Estoque Facil</p>
-        <div class="list-group">
-          <a href="#!/produtos" class="list-group-menu list-group-item active" id="products-menu-item">
-            Produtos
-          </a>
-          <a href="#!/vendas" class="list-group-menu list-group-item" id="sales-menu-item">
-            Vendas
-          </a>
-        </div>
-      </div>
+
+      <sidebar></sidebar>
 
       <div class="col-md-9">
           <div ng-view=""></div>
@@ -74,6 +65,8 @@
   <script src="app/components/search-product/search-product.component.js"></script>
   <script src="app/components/navbar/navbar.module.js"></script>
   <script src="app/components/navbar/navbar.component.js"></script>
+  <script src="app/components/sidebar/sidebar.module.js"></script>
+  <script src="app/components/sidebar/sidebar.component.js"></script>
   <script src="app/components/header/header.module.js"></script>
   <script src="app/components/header/header.component.js"></script>
   <script src="app/components/login/login.module.js"></script>

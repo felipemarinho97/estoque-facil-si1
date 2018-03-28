@@ -5,7 +5,7 @@
         <span class="title">Produtos</span>
         <ul class="pull-right c-controls">
           <li>
-            <a class="btn btn-success" ng-click="openCreateProductDialog()">Adicionar Produto</a>
+            <a class="btn btn-success" ng-if="isAdmin()" ng-click="openCreateProductDialog()">Adicionar Produto</a>
           </li>
         </ul>
       </div>
@@ -44,10 +44,10 @@
             </h4>
             <h5 id="product-price">
               <div ng-if="!product.preco">
-                R$ 0,00
+                <div ng-if="isAdmin()">R$ 0,00</div>
               </div>
               <div ng-if="product.preco">
-                R$ {{product.preco}}
+                <div ng-if="isAdmin() || product.situacao === true">R$ {{product.preco}}</div>
               </div>
             </h5>
             <h5 id="product-situation">
@@ -58,7 +58,10 @@
                 Em falta
               </div>
             </h5>
-            <div class="btn-group" uib-dropdown>
+            <div ng-if="product.situacao === true">
+                <a class="btn btn-success" ng-if="!isAdmin()" ng-click="comprar(product)">Comprar</a>
+            </div>
+            <div ng-if="isAdmin()" class="btn-group" uib-dropdown>
               <button id="single-button" type="button" class="btn btn-default pull-right" uib-dropdown-toggle>
                 <span class="glyphicon glyphicon-cog"></span><span class="caret"></span>
               </button>
@@ -68,9 +71,9 @@
                 <li role="menuitem"><a ng-click="openAtribuirDescontoParaCategoriaDialog(product)">Atribuir desconto</a></li>
               </ul>
             </div>
-          </div>          
-        </div>        
+          </div>
+        </div>
       </div>
-    </div>    
+    </div>
   </div>
 </div>
